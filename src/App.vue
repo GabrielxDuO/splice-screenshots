@@ -39,38 +39,38 @@ useEventListener(typeof window !== "undefined" ? window : null, "dragover", (e) 
 </script>
 
 <template>
-  <DropZone class="flex h-full min-h-screen flex-col bg-neutral-50 text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100">
+  <DropZone class="flex h-dvh max-h-dvh min-h-0 flex-col overflow-hidden bg-neutral-50 text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100">
     <AppHeader />
 
-    <div class="flex min-h-0 flex-1 flex-col">
-      <div class="flex justify-center px-3 py-2 md:hidden">
+    <div class="flex min-h-0 flex-1 flex-col overflow-hidden">
+      <div class="flex shrink-0 justify-center px-3 py-2 md:hidden">
         <Segmented v-model="mobileTab" :options="tabOptions" />
       </div>
 
       <div
         ref="workspace"
-        class="relative flex min-h-0 min-w-0 flex-1 flex-col md:flex-row"
+        class="relative flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden md:flex-row"
         :class="dragging ? 'cursor-col-resize select-none' : ''"
       >
         <div
-          class="flex min-h-0 min-w-0 flex-col md:min-w-[240px]"
+          class="flex min-h-0 min-w-0 flex-col overflow-hidden md:min-w-[240px] md:pr-3"
           :class="[
             mobileTab === 'sources' ? 'flex-1' : 'hidden md:flex',
           ]"
           :style="leftPaneStyle"
         >
-          <SourceList class="h-full min-h-0 w-full min-w-0" />
+          <SourceList class="min-h-0 w-full min-w-0 flex-1" />
         </div>
 
         <WorkspaceDivider :dragging="dragging" @pointerdown="onResizePointerDown" />
 
         <div
-          class="min-h-0 min-w-0 flex flex-col md:flex-1"
+          class="flex min-h-0 min-w-0 flex-col overflow-hidden md:flex-1"
           :class="[
             mobileTab === 'preview' ? 'flex flex-1' : 'hidden md:flex',
           ]"
         >
-          <JoinedPreview class="h-full min-h-0 w-full min-w-0" />
+          <JoinedPreview class="min-h-0 w-full min-w-0 flex-1" />
         </div>
       </div>
     </div>

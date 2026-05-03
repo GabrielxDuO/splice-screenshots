@@ -18,7 +18,7 @@ const { isOverDropZone } = useDropZone(root, {
 </script>
 
 <template>
-  <div ref="root" class="relative flex h-full min-h-0 flex-col">
+  <div ref="root" class="relative flex h-full min-h-0 flex-col overflow-hidden">
     <slot />
 
     <Transition

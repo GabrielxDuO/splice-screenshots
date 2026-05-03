@@ -4,7 +4,7 @@ import IconImagePlus from "~icons/lucide/image-plus";
 import IconTrash2 from "~icons/lucide/trash-2";
 
 import Hero from "@/components/Hero.vue";
-import OsScroller from "@/components/OsScroller.vue";
+import PaneScroll from "@/components/PaneScroll.vue";
 import ScreenshotItem from "@/components/ScreenshotItem.vue";
 
 import AppButton from "@/components/ui/AppButton.vue";
@@ -20,10 +20,12 @@ const isEmpty = computed(() => store.items.value.length === 0);
 </script>
 
 <template>
-  <section class="flex h-full min-h-0 flex-col">
-    <Hero v-if="isEmpty" />
+  <section class="flex min-h-0 flex-1 flex-col overflow-hidden">
+    <div v-if="isEmpty" class="min-h-0 flex-1 overflow-y-auto overscroll-y-contain">
+      <Hero />
+    </div>
 
-    <OsScroller v-else class="min-h-0 flex-1">
+    <PaneScroll v-else class="min-h-0 flex-1">
       <div class="w-full space-y-4 px-4 py-6 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between gap-2">
           <h2 class="text-[15px] font-semibold tracking-tight">
@@ -56,6 +58,6 @@ const isEmpty = computed(() => store.items.value.length === 0);
           <span>{{ t("add_more") }}</span>
         </AppButton>
       </div>
-    </OsScroller>
+    </PaneScroll>
   </section>
 </template>

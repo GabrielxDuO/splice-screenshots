@@ -4,7 +4,7 @@ import { computed, onMounted, ref, useTemplateRef, watch } from "vue";
 import IconDownload from "~icons/lucide/download";
 import IconImageOff from "~icons/lucide/image-off";
 
-import OsScroller from "@/components/OsScroller.vue";
+import PaneScroll from "@/components/PaneScroll.vue";
 import AppButton from "@/components/ui/AppButton.vue";
 import { useI18n } from "@/composables/useI18n";
 import { useScreenshotsStore } from "@/composables/useScreenshotsStore";
@@ -48,8 +48,8 @@ async function handleDownload() {
 </script>
 
 <template>
-  <section class="flex h-full min-h-0 flex-col">
-    <OsScroller class="min-h-0 flex-1">
+  <section class="flex min-h-0 flex-1 flex-col overflow-hidden">
+    <PaneScroll class="min-h-0 flex-1">
       <div class="w-full px-4 py-6 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between gap-2 pb-3">
           <h2 class="text-[15px] font-semibold tracking-tight">
@@ -102,7 +102,7 @@ async function handleDownload() {
           </div>
         </div>
       </div>
-    </OsScroller>
+    </PaneScroll>
 
     <div
       class="border-t border-black/[0.06] bg-white/80 px-4 py-3 backdrop-blur-xl md:hidden dark:border-white/[0.06] dark:bg-neutral-950/80"
