@@ -65,7 +65,12 @@ watch(
 );
 
 type Edge = "top" | "bottom";
-let dragging: { edge: Edge; offset: number; pointerId: number } | null = null;
+let dragging: {
+  edge: Edge;
+  offset: number;
+  pointerId: number;
+  toggledViaAltOnDown: boolean;
+} | null = null;
 
 function ratioFromEvent(event: PointerEvent, offset: number): number {
   const el = view.value;
@@ -82,10 +87,16 @@ function onHandleDown(event: PointerEvent, edge: Edge) {
   const target = event.currentTarget as HTMLElement;
   target.setPointerCapture(event.pointerId);
   const rect = target.getBoundingClientRect();
+  let toggledViaAltOnDown = false;
+  if (event.altKey) {
+    store.toggleLocalRatio(props.item.id);
+    toggledViaAltOnDown = true;
+  }
   dragging = {
     edge,
     offset: event.clientY - rect.top - rect.height / 2,
     pointerId: event.pointerId,
+    toggledViaAltOnDown,
   };
 }
 
@@ -101,12 +112,17 @@ function onHandleUp(event: PointerEvent) {
   if (!dragging || event.pointerId !== dragging.pointerId)
     return;
   event.preventDefault();
+  const toggledViaAltOnDown = dragging.toggledViaAltOnDown;
   const target = event.currentTarget as HTMLElement;
   if (target.hasPointerCapture(event.pointerId)) {
     target.releasePointerCapture(event.pointerId);
   }
   dragging = null;
   if (detectDoubleTap(event)) {
+    store.toggleLocalRatio(props.item.id);
+    return;
+  }
+  if (!toggledViaAltOnDown && event.altKey) {
     store.toggleLocalRatio(props.item.id);
   }
 }

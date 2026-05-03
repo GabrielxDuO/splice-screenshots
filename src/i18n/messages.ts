@@ -56,7 +56,7 @@ const zhCN = {
   tips_modal_intro: "下面这些能力在界面上没有单独标出来，可以这样用：",
   tips_para_handles: "在两张截图之间的横条手柄上拖动，可调整每张图参与拼接的上下裁切边界。",
   tips_para_double:
-    "在每张图上方或下方的细横条手柄上快速连点两次（或触控双击），可在「该图独立字幕裁切比例」与「跟随全局比例」之间切换。",
+    "在每张图上方或下方的细横条手柄上快速连点两次（或触控双击），或在按住 Alt（⌥）的同时拖动手柄，可在「该图独立字幕裁切比例」与「跟随全局比例」之间切换。",
   tips_para_splitter: "在较宽的屏幕上，拖动中间竖向分隔条可调整左侧列表与右侧预览区域的宽度。",
   tips_para_persist: "截图列表会自动保存在本机浏览器（IndexedDB），刷新页面后仍会保留，直到你清空或清除站点数据。",
   tips_para_drop: "把图片拖到浏览器窗口的任意位置（不仅左侧空白区）即可导入。",
@@ -116,7 +116,7 @@ const enUS: Record<MessageKey, string> = {
   tips_para_handles:
     "Drag the horizontal bar between two screenshots to adjust the top/bottom crop each image contributes to the join.",
   tips_para_double:
-    "Double‑click (or double‑tap) the thin horizontal handles above or below each screenshot to toggle between a local subtitle crop ratio for that shot only and the global ratio.",
+    "Double‑click (or double‑tap) the thin horizontal handles above or below each screenshot, or drag a handle while holding Alt (⌥), to toggle between a local subtitle crop ratio for that shot only and the global ratio.",
   tips_para_splitter:
     "On wide layouts, drag the vertical splitter between the source list and preview to resize both panels.",
   tips_para_persist:
