@@ -64,7 +64,7 @@ async function handleDownload() {
         </div>
 
         <div
-          class="relative overflow-hidden rounded-2xl bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04)] ring-1 ring-black/[0.06] dark:bg-neutral-900 dark:ring-white/[0.06]"
+          class="relative overflow-hidden rounded-2xl bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04)] ring-1 ring-black/6 dark:bg-neutral-900 dark:ring-white/6"
         >
           <canvas
             v-show="hasImages"
@@ -74,10 +74,10 @@ async function handleDownload() {
 
           <div
             v-if="!hasImages"
-            class="flex aspect-[16/10] flex-col items-center justify-center gap-3 text-center"
+            class="flex aspect-16/10 flex-col items-center justify-center gap-3 text-center"
           >
             <span
-              class="grid size-12 place-items-center rounded-2xl bg-black/[0.04] text-neutral-400 dark:bg-white/[0.04]"
+              class="grid size-12 place-items-center rounded-2xl bg-black/4 text-neutral-400 dark:bg-white/4"
             >
               <IconImageOff class="size-6" />
             </span>
@@ -105,7 +105,7 @@ async function handleDownload() {
     </PaneScroll>
 
     <div
-      class="border-t border-black/[0.06] bg-white/80 px-4 py-3 backdrop-blur-xl md:hidden dark:border-white/[0.06] dark:bg-neutral-950/80"
+      class="border-t border-black/6 bg-white/80 px-4 py-3 backdrop-blur-xl md:hidden dark:border-white/6 dark:bg-neutral-950/80"
       style="padding-bottom: calc(env(safe-area-inset-bottom) + 12px);"
     >
       <AppButton

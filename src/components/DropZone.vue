@@ -29,13 +29,13 @@ const { isOverDropZone } = useDropZone(root, {
     >
       <div
         v-if="isOverDropZone"
-        class="pointer-events-none fixed inset-0 z-50 flex items-center justify-center bg-[color:color-mix(in_srgb,var(--color-accent)_10%,transparent)] backdrop-blur-sm"
+        class="pointer-events-none fixed inset-0 z-50 flex items-center justify-center bg-[color-mix(in_srgb,var(--color-accent)_10%,transparent)] backdrop-blur-sm"
       >
         <div
-          class="flex flex-col items-center gap-3 rounded-3xl bg-white/85 px-10 py-8 text-center shadow-[0_24px_60px_-20px_rgba(10,132,255,0.45)] ring-1 ring-[color:color-mix(in_srgb,var(--color-accent)_40%,transparent)] dark:bg-neutral-900/85 dark:ring-[color:color-mix(in_srgb,var(--color-accent)_55%,transparent)]"
+          class="flex flex-col items-center gap-3 rounded-3xl bg-white/85 px-10 py-8 text-center shadow-[0_24px_60px_-20px_rgba(10,132,255,0.45)] ring-1 ring-[color-mix(in_srgb,var(--color-accent)_40%,transparent)] dark:bg-neutral-900/85 dark:ring-[color-mix(in_srgb,var(--color-accent)_55%,transparent)]"
         >
           <span
-            class="grid size-12 place-items-center rounded-2xl bg-[color:color-mix(in_srgb,var(--color-accent)_15%,transparent)] text-[color:var(--color-accent)]"
+            class="grid size-12 place-items-center rounded-2xl bg-[color-mix(in_srgb,var(--color-accent)_15%,transparent)] text-accent"
           >
             <IconUpload class="size-6" />
           </span>

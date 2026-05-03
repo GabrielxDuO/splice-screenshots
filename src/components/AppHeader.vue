@@ -33,12 +33,12 @@ const themeModel = computed({
 
 <template>
   <header
-    class="sticky top-0 z-30 w-full border-b border-black/[0.06] bg-white/70 backdrop-blur-xl backdrop-saturate-150 dark:border-white/[0.06] dark:bg-neutral-950/60"
+    class="sticky top-0 z-30 w-full border-b border-black/6 bg-white/70 backdrop-blur-xl backdrop-saturate-150 dark:border-white/6 dark:bg-neutral-950/60"
   >
     <div class="mx-auto flex h-14 w-full max-w-[2200px] items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
       <div class="flex min-w-0 items-center gap-2.5">
         <span
-          class="grid size-8 shrink-0 place-items-center rounded-xl bg-[color:color-mix(in_srgb,var(--color-accent)_12%,transparent)] text-[color:var(--color-accent)]"
+          class="grid size-8 shrink-0 place-items-center rounded-xl bg-[color-mix(in_srgb,var(--color-accent)_12%,transparent)] text-accent"
         >
           <IconLayers class="size-[18px]" />
         </span>

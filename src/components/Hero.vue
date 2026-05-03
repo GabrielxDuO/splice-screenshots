@@ -26,15 +26,15 @@ const steps = computed(() => [
       <div class="grid gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-stretch lg:gap-12">
         <div class="flex min-h-0 flex-col justify-center">
           <div
-            class="relative flex min-h-[min(52vh,420px)] w-full flex-col items-center justify-center overflow-hidden rounded-3xl bg-white/60 ring-1 ring-black/[0.06] backdrop-blur-md dark:bg-white/[0.04] dark:ring-white/[0.06] lg:min-h-[min(60vh,520px)]"
+            class="relative flex min-h-[min(52vh,420px)] w-full flex-col items-center justify-center overflow-hidden rounded-3xl bg-white/60 ring-1 ring-black/6 backdrop-blur-md dark:bg-white/4 dark:ring-white/6 lg:min-h-[min(60vh,520px)]"
           >
             <span
               aria-hidden="true"
-              class="pointer-events-none absolute inset-3 rounded-2xl border border-dashed border-black/[0.10] dark:border-white/[0.10]"
+              class="pointer-events-none absolute inset-3 rounded-2xl border border-dashed border-black/10 dark:border-white/10"
             />
             <div class="flex max-w-md flex-col items-center gap-3 px-6">
               <span
-                class="grid size-14 place-items-center rounded-2xl bg-[color:color-mix(in_srgb,var(--color-accent)_12%,transparent)] text-[color:var(--color-accent)]"
+                class="grid size-14 place-items-center rounded-2xl bg-[color-mix(in_srgb,var(--color-accent)_12%,transparent)] text-accent"
               >
                 <IconUpload class="size-7" />
               </span>
@@ -60,7 +60,7 @@ const steps = computed(() => [
             class="flex items-center gap-3 rounded-xl px-3 py-2.5 text-[13px] text-neutral-600 dark:text-neutral-300"
           >
             <span
-              class="grid size-6 shrink-0 place-items-center rounded-full bg-black/[0.05] text-[11px] font-semibold tabular-nums text-neutral-700 dark:bg-white/[0.06] dark:text-neutral-200"
+              class="grid size-6 shrink-0 place-items-center rounded-full bg-black/5 text-[11px] font-semibold tabular-nums text-neutral-700 dark:bg-white/6 dark:text-neutral-200"
             >
               {{ i + 1 }}
             </span>

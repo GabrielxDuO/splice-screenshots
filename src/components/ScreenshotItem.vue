@@ -167,11 +167,11 @@ const handleColorClass = computed(() =>
 
 <template>
   <article
-    class="group relative overflow-hidden rounded-2xl bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04)] ring-1 ring-black/[0.06] dark:bg-neutral-900 dark:ring-white/[0.06]"
+    class="group relative overflow-hidden rounded-2xl bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04)] ring-1 ring-black/6 dark:bg-neutral-900 dark:ring-white/6"
   >
     <div class="flex items-center justify-between gap-2 px-3 py-2">
       <span
-        class="inline-flex h-6 min-w-[24px] items-center justify-center rounded-full bg-black/[0.05] px-2 text-[11px] font-semibold tabular-nums text-neutral-700 dark:bg-white/[0.06] dark:text-neutral-200"
+        class="inline-flex h-6 min-w-[24px] items-center justify-center rounded-full bg-black/5 px-2 text-[11px] font-semibold tabular-nums text-neutral-700 dark:bg-white/6 dark:text-neutral-200"
       >
         {{ index + 1 }}
       </span>
@@ -223,7 +223,7 @@ const handleColorClass = computed(() =>
       <div
         v-if="!isFirst"
         class="absolute left-0 right-0 z-10 -translate-y-1/2 cursor-row-resize touch-none h-2 flex items-center before:block before:h-px before:w-full" :class="[
-          item.useLocalRatio ? 'before:bg-[color:var(--color-accent)]' : 'before:bg-white/95 dark:before:bg-white/85',
+          item.useLocalRatio ? 'before:bg-accent' : 'before:bg-white/95 dark:before:bg-white/85',
         ]"
         :style="{ top: topPercent }"
         :aria-label="t('move_up')"
@@ -241,7 +241,7 @@ const handleColorClass = computed(() =>
       <div
         v-if="!isLast"
         class="absolute left-0 right-0 z-10 -translate-y-1/2 cursor-row-resize touch-none h-2 flex items-center before:block before:h-px before:w-full" :class="[
-          item.useLocalRatio ? 'before:bg-[color:var(--color-accent)]' : 'before:bg-white/95 dark:before:bg-white/85',
+          item.useLocalRatio ? 'before:bg-accent' : 'before:bg-white/95 dark:before:bg-white/85',
         ]"
         :style="{ top: bottomPercent }"
         :aria-label="t('move_down')"
