@@ -28,9 +28,9 @@ const localeOptions = computed(() => [
 ]);
 
 const themeModel = computed({
-  get: () => (prefs.theme.value === "auto" ? "auto" : prefs.theme.value) as "light" | "dark" | "auto",
+  get: () => prefs.theme.store.value as "light" | "dark" | "auto",
   set: (v) => {
-    prefs.theme.value = v;
+    prefs.theme.store.value = v;
   },
 });
 </script>
