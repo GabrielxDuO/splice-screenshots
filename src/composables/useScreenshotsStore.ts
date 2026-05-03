@@ -236,10 +236,8 @@ export const useScreenshotsStore = createGlobalState(() => {
     if (!it)
       return;
     it.useLocalRatio = !it.useLocalRatio;
-    if (!it.useLocalRatio) {
-      it.localTopRatio = topRatio.value;
-      it.localBottomRatio = bottomRatio.value;
-    }
+    it.localTopRatio = topRatio.value;
+    it.localBottomRatio = bottomRatio.value;
     queuePersistRatiosDebounced();
   }
 

@@ -9,6 +9,7 @@ import IconButton from "@/components/ui/IconButton.vue";
 import { useI18n } from "@/composables/useI18n";
 import { useScreenshotsStore } from "@/composables/useScreenshotsStore";
 
+import { consumeAltChordToggle } from "@/utils/altChordLatch";
 import { detectDoubleTap } from "@/utils/pointer";
 
 interface Props {
@@ -88,7 +89,7 @@ function onHandleDown(event: PointerEvent, edge: Edge) {
   target.setPointerCapture(event.pointerId);
   const rect = target.getBoundingClientRect();
   let toggledViaAltOnDown = false;
-  if (event.altKey) {
+  if (event.altKey && consumeAltChordToggle()) {
     store.toggleLocalRatio(props.item.id);
     toggledViaAltOnDown = true;
   }
@@ -122,7 +123,7 @@ function onHandleUp(event: PointerEvent) {
     store.toggleLocalRatio(props.item.id);
     return;
   }
-  if (!toggledViaAltOnDown && event.altKey) {
+  if (!toggledViaAltOnDown && event.altKey && consumeAltChordToggle()) {
     store.toggleLocalRatio(props.item.id);
   }
 }
