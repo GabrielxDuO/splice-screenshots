@@ -1,1 +1,79 @@
 @import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans:
+    -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display",
+    "Segoe UI", "Hiragino Sans GB", "PingFang SC", "Microsoft YaHei",
+    system-ui, sans-serif;
+
+  --color-accent: #0a84ff;
+  --color-accent-hover: #0070e0;
+}
+
+@layer base {
+  html,
+  body,
+  #app {
+    height: 100%;
+  }
+
+  html {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    color-scheme: light;
+    background-color: #fafafa;
+  }
+
+  html.dark {
+    color-scheme: dark;
+    background-color: #0a0a0a;
+  }
+
+  body {
+    margin: 0;
+    color: rgb(23 23 23);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html.dark body {
+    color: rgb(245 245 245);
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  button {
+    font-family: inherit;
+  }
+}
+
+.os-theme-app > .os-scrollbar > .os-scrollbar-track > .os-scrollbar-handle {
+  background: rgb(0 0 0 / 0.22);
+}
+.os-theme-app
+  > .os-scrollbar:hover
+  > .os-scrollbar-track
+  > .os-scrollbar-handle {
+  background: rgb(0 0 0 / 0.36);
+}
+.dark
+  .os-theme-app
+  > .os-scrollbar
+  > .os-scrollbar-track
+  > .os-scrollbar-handle {
+  background: rgb(255 255 255 / 0.22);
+}
+.dark
+  .os-theme-app
+  > .os-scrollbar:hover
+  > .os-scrollbar-track
+  > .os-scrollbar-handle {
+  background: rgb(255 255 255 / 0.4);
+}

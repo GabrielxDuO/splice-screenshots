@@ -1,5 +1,6 @@
-import { createApp } from "vue";
-import App from "./App.vue";
-import "./style.css";
+import { ViteSSG } from "vite-ssg/single-page";
+import App from "@/App.vue";
+import "overlayscrollbars/overlayscrollbars.css";
+import "@/style.css";
 
-createApp(App).mount("#app");
+export const createApp = ViteSSG(App);
