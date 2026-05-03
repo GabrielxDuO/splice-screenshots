@@ -89,7 +89,7 @@ function onHandleDown(event: PointerEvent, edge: Edge) {
   target.setPointerCapture(event.pointerId);
   const rect = target.getBoundingClientRect();
   let toggledViaAltOnDown = false;
-  if (event.altKey && consumeAltChordToggle()) {
+  if (event.altKey && consumeAltChordToggle() && !props.item.useLocalRatio) {
     store.toggleLocalRatio(props.item.id);
     toggledViaAltOnDown = true;
   }
@@ -123,7 +123,7 @@ function onHandleUp(event: PointerEvent) {
     store.toggleLocalRatio(props.item.id);
     return;
   }
-  if (!toggledViaAltOnDown && event.altKey && consumeAltChordToggle()) {
+  if (!toggledViaAltOnDown && event.altKey && consumeAltChordToggle() && !props.item.useLocalRatio) {
     store.toggleLocalRatio(props.item.id);
   }
 }

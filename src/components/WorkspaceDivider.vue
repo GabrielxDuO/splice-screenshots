@@ -15,7 +15,6 @@ const { t } = useI18n();
 </script>
 
 <template>
-  <!-- w-0: panes meet at seam so source scrollbar sits flush with split; hit area is absolute -->
   <div
     class="pointer-events-none relative hidden w-0 shrink-0 self-stretch overflow-visible md:block"
   >

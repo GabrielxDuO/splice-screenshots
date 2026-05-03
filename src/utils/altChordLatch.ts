@@ -15,7 +15,6 @@ if (typeof window !== "undefined") {
   );
 }
 
-/** 若本次 Alt 和弦尚未用过则返回 true，并占用直至松开 Alt */
 export function consumeAltChordToggle(): boolean {
   if (suppressUntilAltRelease)
     return false;

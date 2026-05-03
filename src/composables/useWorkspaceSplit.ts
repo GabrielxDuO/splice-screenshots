@@ -67,9 +67,7 @@ export function useWorkspaceSplit(workspaceRef: Ref<HTMLElement | null>) {
       try {
         target?.releasePointerCapture(e.pointerId);
       }
-      catch {
-        /* ignore */
-      }
+      catch {}
       window.removeEventListener("pointermove", onMove);
       window.removeEventListener("pointerup", onUp);
       window.removeEventListener("pointercancel", onUp);

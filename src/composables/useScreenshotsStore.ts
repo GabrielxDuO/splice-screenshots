@@ -38,7 +38,6 @@ export const useScreenshotsStore = createGlobalState(() => {
   const items = ref<ScreenshotItem[]>([]);
   const topRatio = ref(0.85);
   const bottomRatio = ref(1);
-  /** Prerender has no IndexedDB → ready immediately; browser waits for restore */
   const workspaceReady = ref(typeof indexedDB === "undefined");
   const blobSourceById = new Map<string, Blob>();
 
