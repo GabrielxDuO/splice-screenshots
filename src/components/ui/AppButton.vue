@@ -42,7 +42,8 @@ const classes = computed(() => {
       "active:brightness-[0.96]",
       "disabled:bg-neutral-100 disabled:text-neutral-500 disabled:shadow-none",
       "disabled:ring-1 disabled:ring-inset disabled:ring-black/[0.08] dark:disabled:bg-white/[0.06] dark:disabled:text-neutral-400",
-      "dark:disabled:ring-white/[0.1] disabled:[&_svg]:opacity-55",
+      "dark:disabled:ring-white/[0.1]",
+      "disabled:[&_svg]:text-neutral-500 disabled:[&_svg]:opacity-100 dark:disabled:[&_svg]:text-neutral-400",
     ].join(" "),
     secondary: [
       "bg-white text-neutral-900",
