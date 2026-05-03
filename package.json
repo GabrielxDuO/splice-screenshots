@@ -7,6 +7,8 @@
     "dev": "vite",
     "build": "vue-tsc -b && vite-ssg build",
     "preview": "vite preview",
+    "deploy": "wrangler deploy",
+    "worker:dev": "wrangler dev",
     "lint": "eslint",
     "lint:fix": "eslint --fix"
   },
@@ -28,6 +30,7 @@
     "unplugin-icons": "^23.0.1",
     "vite": "^8.0.10",
     "vite-ssg": "^28.3.0",
-    "vue-tsc": "^3.2.7"
+    "vue-tsc": "^3.2.7",
+    "wrangler": "^4.87.0"
   }
 }
