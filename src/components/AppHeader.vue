@@ -1,15 +1,19 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, ref } from "vue";
+import IconCircleHelp from "~icons/lucide/circle-help";
 import IconLayers from "~icons/lucide/layers";
 import IconMonitor from "~icons/lucide/monitor";
 import IconMoon from "~icons/lucide/moon";
 import IconSun from "~icons/lucide/sun";
 
+import TipsModal from "@/components/TipsModal.vue";
+import IconButton from "@/components/ui/IconButton.vue";
 import Segmented from "@/components/ui/Segmented.vue";
 import { useI18n } from "@/composables/useI18n";
 import { usePreferencesStore } from "@/composables/usePreferencesStore";
 
 const { t, locale } = useI18n();
+const tipsOpen = ref(false);
 const prefs = usePreferencesStore();
 
 const themeOptions = computed(() => [
@@ -48,6 +52,10 @@ const themeModel = computed({
       </div>
 
       <div class="flex shrink-0 items-center gap-2">
+        <IconButton variant="soft" size="sm" :label="t('tips_button')" @click="tipsOpen = true">
+          <IconCircleHelp />
+        </IconButton>
+
         <div class="hidden sm:block">
           <Segmented
             v-model="themeModel"
@@ -65,5 +73,7 @@ const themeModel = computed({
         />
       </div>
     </div>
+
+    <TipsModal v-model="tipsOpen" />
   </header>
 </template>

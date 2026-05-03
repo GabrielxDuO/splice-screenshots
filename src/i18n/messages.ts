@@ -49,6 +49,17 @@ const zhCN = {
   workspace_loading: "载入本地记录…",
 
   download_filename: "拼接截图",
+
+  tips_button: "使用提示",
+  tips_modal_title: "你可能不知道的功能",
+  tips_modal_close: "关闭",
+  tips_modal_intro: "下面这些能力在界面上没有单独标出来，可以这样用：",
+  tips_para_handles: "在两张截图之间的横条手柄上拖动，可调整每张图参与拼接的上下裁切边界。",
+  tips_para_double:
+    "在每张图上方或下方的细横条手柄上快速连点两次（或触控双击），可在「该图独立字幕裁切比例」与「跟随全局比例」之间切换。",
+  tips_para_splitter: "在较宽的屏幕上，拖动中间竖向分隔条可调整左侧列表与右侧预览区域的宽度。",
+  tips_para_persist: "截图列表会自动保存在本机浏览器（IndexedDB），刷新页面后仍会保留，直到你清空或清除站点数据。",
+  tips_para_drop: "把图片拖到浏览器窗口的任意位置（不仅左侧空白区）即可导入。",
 } as const;
 
 export type MessageKey = keyof typeof zhCN;
@@ -97,6 +108,20 @@ const enUS: Record<MessageKey, string> = {
   workspace_loading: "Loading saved screenshots…",
 
   download_filename: "joined-screenshot",
+
+  tips_button: "Tips",
+  tips_modal_title: "Less obvious features",
+  tips_modal_close: "Close",
+  tips_modal_intro: "These shortcuts aren’t spelled out on screen, but they work:",
+  tips_para_handles:
+    "Drag the horizontal bar between two screenshots to adjust the top/bottom crop each image contributes to the join.",
+  tips_para_double:
+    "Double‑click (or double‑tap) the thin horizontal handles above or below each screenshot to toggle between a local subtitle crop ratio for that shot only and the global ratio.",
+  tips_para_splitter:
+    "On wide layouts, drag the vertical splitter between the source list and preview to resize both panels.",
+  tips_para_persist:
+    "Your screenshot list is saved locally in IndexedDB and survives refresh until you clear it or wipe site data.",
+  tips_para_drop: "Drop images anywhere on the browser window—not only on the empty left pane—to import.",
 };
 
 export const messages: Record<Locale, Record<MessageKey, string>> = {
