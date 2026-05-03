@@ -39,7 +39,7 @@ const isEmpty = computed(() => store.items.value.length === 0);
         </div>
 
         <div
-          class="grid gap-4 [grid-template-columns:repeat(auto-fill,minmax(min(100%,280px),1fr))]"
+          class="grid min-w-0 w-full gap-4 grid-cols-[repeat(auto-fill,minmax(min(100%,520px),1fr))]"
         >
           <ScreenshotItem
             v-for="(item, i) in store.items.value"
