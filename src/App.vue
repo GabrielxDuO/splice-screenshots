@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useHead } from "@unhead/vue";
 import { useEventListener } from "@vueuse/core";
-import { computed, ref, useTemplateRef } from "vue";
+import { computed, onMounted, ref, useTemplateRef } from "vue";
 import IconImagePlus from "~icons/lucide/image-plus";
 import IconLayoutPanelLeft from "~icons/lucide/layout-panel-left";
 
@@ -12,9 +12,15 @@ import SourceList from "@/components/SourceList.vue";
 import Segmented from "@/components/ui/Segmented.vue";
 import WorkspaceDivider from "@/components/WorkspaceDivider.vue";
 import { useI18n } from "@/composables/useI18n";
+import { useScreenshotsStore } from "@/composables/useScreenshotsStore";
 import { useWorkspaceSplit } from "@/composables/useWorkspaceSplit";
 
 const { t, locale } = useI18n();
+const screenshotsStore = useScreenshotsStore();
+
+onMounted(() => {
+  void screenshotsStore.restoreFromIndexedDb();
+});
 
 const workspaceRef = useTemplateRef<HTMLElement>("workspace");
 const { dragging, leftPaneStyle, onResizePointerDown } = useWorkspaceSplit(workspaceRef);

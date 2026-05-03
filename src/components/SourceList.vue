@@ -17,11 +17,19 @@ const store = useScreenshotsStore();
 const { pick } = useAddScreenshots();
 
 const isEmpty = computed(() => store.items.value.length === 0);
+const showHero = computed(() => store.workspaceReady.value && isEmpty.value);
 </script>
 
 <template>
   <section class="flex min-h-0 flex-1 flex-col overflow-hidden">
-    <div v-if="isEmpty" class="min-h-0 flex-1 overflow-y-auto overscroll-y-contain">
+    <div
+      v-if="!store.workspaceReady.value"
+      class="flex min-h-[min(40vh,320px)] flex-1 items-center justify-center px-6 text-[13px] text-neutral-400 dark:text-neutral-500"
+    >
+      {{ t("workspace_loading") }}
+    </div>
+
+    <div v-else-if="showHero" class="min-h-0 flex-1 overflow-y-auto overscroll-y-contain">
       <Hero />
     </div>
 

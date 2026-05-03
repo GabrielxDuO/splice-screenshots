@@ -18,7 +18,7 @@ export function useAddScreenshots() {
     for (const file of list) {
       try {
         const image = await loadImageBitmap(file);
-        store.addImage(image);
+        store.addImage(image, file);
       }
       catch (err) {
         console.error("Failed to load image", file.name, err);
@@ -34,7 +34,7 @@ export function useAddScreenshots() {
     for (const file of list) {
       try {
         const image = await loadImageBitmap(file);
-        store.addImage(image);
+        store.addImage(image, file);
       }
       catch (err) {
         console.error("Failed to load image", file.name, err);

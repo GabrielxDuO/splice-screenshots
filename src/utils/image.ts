@@ -1,8 +1,27 @@
-export async function loadImageBitmap(file: File): Promise<ImageBitmap> {
+export async function loadImageBitmap(source: Blob): Promise<ImageBitmap> {
   if (typeof window === "undefined" || !("createImageBitmap" in window)) {
     throw new Error("createImageBitmap is not supported in this browser");
   }
-  return await window.createImageBitmap(file);
+  return await window.createImageBitmap(source);
+}
+
+export async function imageBitmapToJpegBlob(
+  bitmap: ImageBitmap,
+  quality = 0.92,
+): Promise<Blob> {
+  const canvas = document.createElement("canvas");
+  canvas.width = bitmap.width;
+  canvas.height = bitmap.height;
+  const ctx = canvas.getContext("2d");
+  if (!ctx)
+    throw new Error("Canvas 2D context unavailable");
+  ctx.drawImage(bitmap, 0, 0);
+  const blob = await new Promise<Blob | null>(resolve =>
+    canvas.toBlob(resolve, "image/jpeg", quality),
+  );
+  if (!blob)
+    throw new Error("canvas.toBlob failed");
+  return blob;
 }
 
 export function downloadBlob(blob: Blob, filename: string): void {
