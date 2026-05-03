@@ -45,6 +45,7 @@ const zhCN = {
   tab_preview: "预览",
 
   workspace_resize_handle: "拖动调整左右区域宽度",
+  workspace_resize_hint: "按住并左右拖动，调整源截图与预览区域的宽度",
 
   download_filename: "拼接截图",
 } as const;
@@ -91,6 +92,7 @@ const enUS: Record<MessageKey, string> = {
   tab_preview: "Preview",
 
   workspace_resize_handle: "Drag to resize panels",
+  workspace_resize_hint: "Drag sideways to resize the source list and preview",
 
   download_filename: "joined-screenshot",
 };
