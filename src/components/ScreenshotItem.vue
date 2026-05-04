@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { ScreenshotItem } from "@/composables/useScreenshotsStore";
-import { computed, onBeforeUnmount, onMounted, useTemplateRef, watch } from "vue";
+import { computed, onBeforeUnmount, onMounted, ref, useTemplateRef, watch } from "vue";
 import IconArrowDown from "~icons/lucide/arrow-down";
 import IconArrowUp from "~icons/lucide/arrow-up";
 
@@ -25,6 +25,7 @@ const store = useScreenshotsStore();
 
 const canvas = useTemplateRef<HTMLCanvasElement>("canvas");
 const view = useTemplateRef<HTMLDivElement>("view");
+const focusedHandle = ref<Edge | null>(null);
 
 const isFirst = computed(() => props.index === 0);
 const isLast = computed(() => props.index === props.total - 1);
@@ -85,6 +86,7 @@ function ratioFromEvent(event: PointerEvent, offset: number): number {
 function onHandleDown(event: PointerEvent, edge: Edge) {
   event.preventDefault();
   event.stopPropagation();
+  focusedHandle.value = edge;
   const target = event.currentTarget as HTMLElement;
   target.setPointerCapture(event.pointerId);
   const rect = target.getBoundingClientRect();
@@ -180,6 +182,16 @@ const handleColorClass = computed(() =>
     ? "bg-[color:var(--color-accent)]"
     : "bg-neutral-900 dark:bg-white",
 );
+
+const handlesOverlap = computed(() => Math.abs(effectiveTop.value - effectiveBottom.value) < 0.0001);
+
+function handleStackClass(edge: Edge): string {
+  const fallbackEdge = handlesOverlap.value
+    ? effectiveTop.value >= 0.5 ? "top" : "bottom"
+    : null;
+  const activeEdge = focusedHandle.value ?? fallbackEdge;
+  return edge === activeEdge ? "z-20" : "z-10";
+}
 </script>
 
 <template>
@@ -239,7 +251,8 @@ const handleColorClass = computed(() =>
 
       <div
         v-if="!isFirst"
-        class="absolute left-0 right-0 z-10 -translate-y-1/2 cursor-row-resize touch-none h-2 flex items-center before:block before:h-px before:w-full" :class="[
+        class="absolute left-0 right-0 -translate-y-1/2 cursor-row-resize touch-none h-2 flex items-center before:block before:h-px before:w-full" :class="[
+          handleStackClass('top'),
           item.useLocalRatio ? 'before:bg-accent' : 'before:bg-white/95 dark:before:bg-white/85',
         ]"
         :style="{ top: topPercent }"
@@ -257,7 +270,8 @@ const handleColorClass = computed(() =>
       </div>
       <div
         v-if="!isLast"
-        class="absolute left-0 right-0 z-10 -translate-y-1/2 cursor-row-resize touch-none h-2 flex items-center before:block before:h-px before:w-full" :class="[
+        class="absolute left-0 right-0 -translate-y-1/2 cursor-row-resize touch-none h-2 flex items-center before:block before:h-px before:w-full" :class="[
+          handleStackClass('bottom'),
           item.useLocalRatio ? 'before:bg-accent' : 'before:bg-white/95 dark:before:bg-white/85',
         ]"
         :style="{ top: bottomPercent }"
