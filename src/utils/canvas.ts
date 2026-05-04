@@ -26,7 +26,6 @@ export function drawJoinedScreenshot(
     sy: number;
     sw: number;
     sh: number;
-    dy: number;
     dw: number;
     dh: number;
   }
@@ -46,7 +45,6 @@ export function drawJoinedScreenshot(
       sy,
       sw: image.width,
       sh,
-      dy: totalHeight,
       dw: minWidth,
       dh,
     });
@@ -59,9 +57,13 @@ export function drawJoinedScreenshot(
   ctx.fillStyle = "#ffffff";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  for (const slice of slices) {
-    if (slice.sh <= 0 || slice.dh <= 0)
-      continue;
+  const drawable = slices.filter(s => s.sh > 0 && s.dh > 0);
+  let destY = 0;
+  for (let i = 0; i < drawable.length; i++) {
+    const slice = drawable[i]!;
+    const isLast = i === drawable.length - 1;
+    const destY1 = isLast ? canvas.height : Math.round(destY + slice.dh);
+    const destH = Math.max(1, destY1 - destY);
     ctx.drawImage(
       slice.image,
       slice.sx,
@@ -69,10 +71,11 @@ export function drawJoinedScreenshot(
       slice.sw,
       slice.sh,
       0,
-      slice.dy,
+      destY,
       slice.dw,
-      slice.dh,
+      destH,
     );
+    destY = destY1;
   }
 }
 
