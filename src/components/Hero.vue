@@ -24,7 +24,7 @@ const steps = computed(() => [
   <div class="flex h-full w-full flex-col items-center px-4 py-10 sm:px-6 lg:px-8">
     <div class="flex w-full max-w-lg flex-col">
       <div
-        class="relative flex min-h-[min(36vh,320px)] w-full flex-col items-center justify-center overflow-hidden rounded-3xl bg-white/60 ring-1 ring-black/6 backdrop-blur-md dark:bg-white/4 dark:ring-white/6 sm:min-h-[min(38vh,380px)]"
+        class="app-animate-pop-in relative flex min-h-[min(36vh,320px)] w-full flex-col items-center justify-center overflow-hidden rounded-3xl bg-white/60 ring-1 ring-black/6 backdrop-blur-md dark:bg-white/4 dark:ring-white/6 sm:min-h-[min(38vh,380px)]"
       >
         <span
           aria-hidden="true"
@@ -32,7 +32,7 @@ const steps = computed(() => [
         />
         <div class="flex max-w-md flex-col items-center gap-3 px-6">
           <span
-            class="grid size-14 place-items-center rounded-2xl bg-[color-mix(in_srgb,var(--color-accent)_12%,transparent)] text-accent"
+            class="grid size-14 place-items-center rounded-2xl bg-[color-mix(in_srgb,var(--color-accent)_12%,transparent)] text-accent transition-transform duration-200 ease-out motion-reduce:transition-none"
           >
             <IconUpload class="size-7" />
           </span>
@@ -45,12 +45,12 @@ const steps = computed(() => [
         </div>
       </div>
 
-      <AppButton class="mt-6 w-full" variant="primary" size="lg" block @click="pick()">
+      <AppButton class="app-animate-fade-up mt-6 w-full" variant="primary" size="lg" block @click="pick()">
         <IconImagePlus />
         <span>{{ t("add") }}</span>
       </AppButton>
 
-      <ul class="mt-10 w-full space-y-2.5">
+      <ul class="app-animate-fade-up mt-10 w-full space-y-2.5">
         <li
           v-for="(step, i) in steps"
           :key="i"

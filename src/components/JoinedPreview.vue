@@ -64,7 +64,7 @@ async function handleDownload() {
         </div>
 
         <div
-          class="relative overflow-hidden rounded-2xl bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04)] ring-1 ring-black/6 dark:bg-neutral-900 dark:ring-white/6"
+          class="relative overflow-hidden rounded-2xl bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04)] ring-1 ring-black/6 transition-shadow duration-200 ease-out dark:bg-neutral-900 dark:ring-white/6"
         >
           <canvas
             v-show="hasImages"
@@ -72,19 +72,26 @@ async function handleDownload() {
             class="block w-full"
           />
 
-          <div
-            v-if="!hasImages"
-            class="flex aspect-16/10 flex-col items-center justify-center gap-3 text-center"
+          <Transition
+            enter-active-class="transition-[opacity,transform] duration-300 ease-out motion-reduce:transition-none"
+            enter-from-class="opacity-0 translate-y-2"
+            leave-active-class="transition-opacity duration-150 ease-out motion-reduce:transition-none"
+            leave-to-class="opacity-0"
           >
-            <span
-              class="grid size-12 place-items-center rounded-2xl bg-black/4 text-neutral-400 dark:bg-white/4"
+            <div
+              v-if="!hasImages"
+              class="flex aspect-16/10 flex-col items-center justify-center gap-3 text-center"
             >
-              <IconImageOff class="size-6" />
-            </span>
-            <p class="px-6 text-[13px] text-neutral-500 dark:text-neutral-400">
-              {{ t("preview_empty_hint") }}
-            </p>
-          </div>
+              <span
+                class="grid size-12 place-items-center rounded-2xl bg-black/4 text-neutral-400 dark:bg-white/4"
+              >
+                <IconImageOff class="size-6" />
+              </span>
+              <p class="px-6 text-[13px] text-neutral-500 dark:text-neutral-400">
+                {{ t("preview_empty_hint") }}
+              </p>
+            </div>
+          </Transition>
         </div>
 
         <div class="hidden pt-4 md:block">

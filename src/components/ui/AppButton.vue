@@ -24,9 +24,9 @@ const classes = computed(() => {
     "inline-flex items-center justify-center gap-2",
     "font-medium tracking-tight",
     "select-none whitespace-nowrap",
-    "transition-[background-color,box-shadow,opacity,color] duration-150 ease-out",
+    "transition-[background-color,box-shadow,opacity,color,transform] duration-150 ease-out motion-reduce:transition-none",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:rgba(10,132,255,0.45)] dark:focus-visible:ring-[color:rgba(64,156,255,0.5)]",
-    "disabled:cursor-not-allowed",
+    "active:scale-[0.98] disabled:cursor-not-allowed disabled:active:scale-100",
   ];
 
   const sizes = {

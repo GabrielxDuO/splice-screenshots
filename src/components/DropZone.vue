@@ -22,9 +22,9 @@ const { isOverDropZone } = useDropZone(root, {
     <slot />
 
     <Transition
-      enter-active-class="transition-opacity duration-150 ease-out"
+      enter-active-class="transition-opacity duration-150 ease-out motion-reduce:transition-none"
       enter-from-class="opacity-0"
-      leave-active-class="transition-opacity duration-150 ease-out"
+      leave-active-class="transition-opacity duration-150 ease-out motion-reduce:transition-none"
       leave-to-class="opacity-0"
     >
       <div
@@ -32,7 +32,7 @@ const { isOverDropZone } = useDropZone(root, {
         class="pointer-events-none fixed inset-0 z-50 flex items-center justify-center bg-[color-mix(in_srgb,var(--color-accent)_10%,transparent)] backdrop-blur-sm"
       >
         <div
-          class="flex flex-col items-center gap-3 rounded-3xl bg-white/85 px-10 py-8 text-center shadow-[0_24px_60px_-20px_rgba(10,132,255,0.45)] ring-1 ring-[color-mix(in_srgb,var(--color-accent)_40%,transparent)] dark:bg-neutral-900/85 dark:ring-[color-mix(in_srgb,var(--color-accent)_55%,transparent)]"
+          class="app-animate-pop-in flex flex-col items-center gap-3 rounded-3xl bg-white/85 px-10 py-8 text-center shadow-[0_24px_60px_-20px_rgba(10,132,255,0.45)] ring-1 ring-[color-mix(in_srgb,var(--color-accent)_40%,transparent)] dark:bg-neutral-900/85 dark:ring-[color-mix(in_srgb,var(--color-accent)_55%,transparent)]"
         >
           <span
             class="grid size-12 place-items-center rounded-2xl bg-[color-mix(in_srgb,var(--color-accent)_15%,transparent)] text-accent"

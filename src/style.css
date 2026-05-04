@@ -5,8 +5,8 @@
 @theme {
   --font-sans:
     -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display",
-    "Segoe UI", "Hiragino Sans GB", "PingFang SC", "Microsoft YaHei",
-    system-ui, sans-serif;
+    "Segoe UI", "Hiragino Sans GB", "PingFang SC", "Microsoft YaHei", system-ui,
+    sans-serif;
 
   --color-accent: #0a84ff;
   --color-accent-hover: #0070e0;
@@ -61,11 +61,21 @@
 
 .app-pane-scroll {
   scrollbar-width: thin;
-  scrollbar-color: color-mix(in srgb, var(--color-accent) 6%, rgb(163 163 163 / 0.42)) transparent;
+  scrollbar-color: color-mix(
+      in srgb,
+      var(--color-accent) 6%,
+      rgb(163 163 163 / 0.42)
+    )
+    transparent;
 }
 
 .dark .app-pane-scroll {
-  scrollbar-color: color-mix(in srgb, var(--color-accent) 8%, rgb(212 212 212 / 0.38)) transparent;
+  scrollbar-color: color-mix(
+      in srgb,
+      var(--color-accent) 8%,
+      rgb(212 212 212 / 0.38)
+    )
+    transparent;
 }
 
 .app-pane-scroll::-webkit-scrollbar {
@@ -79,17 +89,69 @@
 
 .app-pane-scroll::-webkit-scrollbar-thumb {
   border-radius: 9999px;
-  background-color: color-mix(in srgb, var(--color-accent) 6%, rgb(163 163 163 / 0.42));
+  background-color: color-mix(
+    in srgb,
+    var(--color-accent) 6%,
+    rgb(163 163 163 / 0.42)
+  );
 }
 
 .app-pane-scroll::-webkit-scrollbar-thumb:hover {
-  background-color: color-mix(in srgb, var(--color-accent) 22%, rgb(163 163 163 / 0.55));
+  background-color: color-mix(
+    in srgb,
+    var(--color-accent) 22%,
+    rgb(163 163 163 / 0.55)
+  );
 }
 
 .dark .app-pane-scroll::-webkit-scrollbar-thumb {
-  background-color: color-mix(in srgb, var(--color-accent) 8%, rgb(212 212 212 / 0.38));
+  background-color: color-mix(
+    in srgb,
+    var(--color-accent) 8%,
+    rgb(212 212 212 / 0.38)
+  );
 }
 
 .dark .app-pane-scroll::-webkit-scrollbar-thumb:hover {
-  background-color: color-mix(in srgb, var(--color-accent) 28%, rgb(220 220 220 / 0.5));
+  background-color: color-mix(
+    in srgb,
+    var(--color-accent) 28%,
+    rgb(220 220 220 / 0.5)
+  );
+}
+
+@layer utilities {
+  @media (prefers-reduced-motion: no-preference) {
+    .app-animate-fade-up {
+      animation: app-fade-up 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .app-animate-pop-in {
+      animation: app-pop-in 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+  }
+}
+
+@keyframes app-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes app-pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }

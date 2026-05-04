@@ -22,50 +22,64 @@ const showHero = computed(() => store.workspaceReady.value && isEmpty.value);
 
 <template>
   <section class="flex min-h-0 flex-1 flex-col overflow-hidden">
-    <div
-      v-if="!store.workspaceReady.value"
-      class="flex min-h-[min(40vh,320px)] flex-1 items-center justify-center px-6 text-[13px] text-neutral-400 dark:text-neutral-500"
+    <Transition
+      mode="out-in"
+      enter-active-class="transition-[opacity,transform] duration-300 ease-out motion-reduce:transition-none"
+      enter-from-class="opacity-0 translate-y-2"
+      leave-active-class="transition-opacity duration-150 ease-out motion-reduce:transition-none"
+      leave-to-class="opacity-0"
     >
-      {{ t("workspace_loading") }}
-    </div>
+      <div
+        v-if="!store.workspaceReady.value"
+        class="flex min-h-[min(40vh,320px)] flex-1 items-center justify-center px-6 text-[13px] text-neutral-400 dark:text-neutral-500"
+      >
+        {{ t("workspace_loading") }}
+      </div>
 
-    <div v-else-if="showHero" class="min-h-0 flex-1 overflow-y-auto overscroll-y-contain">
-      <Hero />
-    </div>
+      <div v-else-if="showHero" class="min-h-0 flex-1 overflow-y-auto overscroll-y-contain">
+        <Hero />
+      </div>
 
-    <PaneScroll v-else class="min-h-0 flex-1">
-      <div class="w-full space-y-4 px-4 py-6 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between gap-2">
-          <h2 class="text-[15px] font-semibold tracking-tight">
-            {{ t("tab_sources") }}
-            <span class="ml-1 text-[12px] font-normal text-neutral-500 dark:text-neutral-400">
-              {{ store.items.value.length }}
-            </span>
-          </h2>
-          <AppButton variant="ghost" size="md" @click="store.clearAll()">
-            <IconTrash2 />
-            <span>{{ t("clear_all") }}</span>
+      <PaneScroll v-else class="min-h-0 flex-1">
+        <div class="w-full space-y-4 px-4 py-6 sm:px-6 lg:px-8">
+          <div class="flex items-center justify-between gap-2">
+            <h2 class="text-[15px] font-semibold tracking-tight">
+              {{ t("tab_sources") }}
+              <span class="ml-1 text-[12px] font-normal text-neutral-500 dark:text-neutral-400">
+                {{ store.items.value.length }}
+              </span>
+            </h2>
+            <AppButton variant="ghost" size="md" @click="store.clearAll()">
+              <IconTrash2 />
+              <span>{{ t("clear_all") }}</span>
+            </AppButton>
+          </div>
+
+          <TransitionGroup
+            tag="div"
+            class="grid min-w-0 w-full gap-4 grid-cols-[repeat(auto-fill,minmax(min(100%,520px),1fr))]"
+            enter-active-class="transition-[opacity,transform] duration-300 ease-out motion-reduce:transition-none"
+            enter-from-class="opacity-0 translate-y-2 scale-[0.99]"
+            leave-active-class="transition-[opacity,transform] duration-150 ease-in motion-reduce:transition-none"
+            leave-to-class="opacity-0 scale-[0.99]"
+            move-class="transition-transform duration-300 ease-out motion-reduce:transition-none"
+          >
+            <ScreenshotItem
+              v-for="(item, i) in store.items.value"
+              :key="item.id"
+              class="min-w-0"
+              :item="item"
+              :index="i"
+              :total="store.items.value.length"
+            />
+          </TransitionGroup>
+
+          <AppButton variant="secondary" size="lg" block @click="pick()">
+            <IconImagePlus />
+            <span>{{ t("add_more") }}</span>
           </AppButton>
         </div>
-
-        <div
-          class="grid min-w-0 w-full gap-4 grid-cols-[repeat(auto-fill,minmax(min(100%,520px),1fr))]"
-        >
-          <ScreenshotItem
-            v-for="(item, i) in store.items.value"
-            :key="item.id"
-            class="min-w-0"
-            :item="item"
-            :index="i"
-            :total="store.items.value.length"
-          />
-        </div>
-
-        <AppButton variant="secondary" size="lg" block @click="pick()">
-          <IconImagePlus />
-          <span>{{ t("add_more") }}</span>
-        </AppButton>
-      </div>
-    </PaneScroll>
+      </PaneScroll>
+    </Transition>
   </section>
 </template>

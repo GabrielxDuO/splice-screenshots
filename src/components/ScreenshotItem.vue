@@ -251,7 +251,7 @@ function handleStackClass(edge: Edge): string {
 
       <div
         v-if="!isFirst"
-        class="absolute left-0 right-0 -translate-y-1/2 cursor-row-resize touch-none h-2 flex items-center before:block before:h-px before:w-full" :class="[
+        class="absolute left-0 right-0 -translate-y-1/2 cursor-row-resize touch-none h-2 flex items-center before:block before:h-px before:w-full before:transition-colors before:duration-150 before:ease-out motion-reduce:before:transition-none" :class="[
           handleStackClass('top'),
           item.useLocalRatio ? 'before:bg-accent' : 'before:bg-white/95 dark:before:bg-white/85',
         ]"
@@ -263,14 +263,14 @@ function handleStackClass(edge: Edge): string {
         @pointercancel="onHandleCancel"
       >
         <span
-          class="absolute right-2 size-2.5 rounded-full ring-2 ring-white/95 dark:ring-neutral-900" :class="[
+          class="absolute right-2 size-2.5 rounded-full ring-2 ring-white/95 transition-colors duration-150 ease-out motion-reduce:transition-none dark:ring-neutral-900" :class="[
             handleColorClass,
           ]"
         />
       </div>
       <div
         v-if="!isLast"
-        class="absolute left-0 right-0 -translate-y-1/2 cursor-row-resize touch-none h-2 flex items-center before:block before:h-px before:w-full" :class="[
+        class="absolute left-0 right-0 -translate-y-1/2 cursor-row-resize touch-none h-2 flex items-center before:block before:h-px before:w-full before:transition-colors before:duration-150 before:ease-out motion-reduce:before:transition-none" :class="[
           handleStackClass('bottom'),
           item.useLocalRatio ? 'before:bg-accent' : 'before:bg-white/95 dark:before:bg-white/85',
         ]"
@@ -282,7 +282,7 @@ function handleStackClass(edge: Edge): string {
         @pointercancel="onHandleCancel"
       >
         <span
-          class="absolute right-2 size-2.5 rounded-full ring-2 ring-white/95 dark:ring-neutral-900" :class="[
+          class="absolute right-2 size-2.5 rounded-full ring-2 ring-white/95 transition-colors duration-150 ease-out motion-reduce:transition-none dark:ring-neutral-900" :class="[
             handleColorClass,
           ]"
         />

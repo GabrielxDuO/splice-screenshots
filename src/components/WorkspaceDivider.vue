@@ -30,11 +30,11 @@ const { t } = useI18n();
         class="pointer-events-none absolute inset-y-0 left-1/2 w-px -translate-x-1/2 bg-black/6 dark:bg-white/6"
       />
       <span
-        class="relative rounded-full bg-black/5 p-1 ring-1 ring-black/4 transition-[background-color,box-shadow] duration-150 ease-out dark:bg-white/6 dark:ring-white/4"
+        class="relative rounded-full bg-black/5 p-1 ring-1 ring-black/4 transition-[background-color,box-shadow,transform] duration-150 ease-out motion-reduce:transition-none dark:bg-white/6 dark:ring-white/4"
         :class="[
           dragging
-            ? 'shadow-[0_1px_2px_rgba(0,0,0,0.06)] ring-[rgba(10,132,255,0.35)] dark:bg-neutral-700 dark:shadow-none dark:ring-[rgba(64,156,255,0.38)]'
-            : 'shadow-[0_1px_2px_rgba(0,0,0,0.04)] group-hover:bg-black/[0.07] dark:group-hover:bg-white/9',
+            ? 'scale-105 shadow-[0_1px_2px_rgba(0,0,0,0.06)] ring-[rgba(10,132,255,0.35)] dark:bg-neutral-700 dark:shadow-none dark:ring-[rgba(64,156,255,0.38)]'
+            : 'shadow-[0_1px_2px_rgba(0,0,0,0.04)] group-hover:bg-black/[0.07] group-hover:scale-105 dark:group-hover:bg-white/9',
         ]"
       >
         <IconGripVertical

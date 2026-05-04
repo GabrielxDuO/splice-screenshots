@@ -21,9 +21,9 @@ defineEmits<{ click: [event: MouseEvent] }>();
 const classes = computed(() => {
   const base = [
     "inline-flex items-center justify-center rounded-full",
-    "transition-[background-color,opacity] duration-150 ease-out",
+    "transition-[background-color,opacity,transform] duration-150 ease-out motion-reduce:transition-none",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:rgba(10,132,255,0.45)] dark:focus-visible:ring-[color:rgba(64,156,255,0.5)]",
-    "disabled:opacity-40 disabled:cursor-not-allowed",
+    "active:scale-[0.94] disabled:cursor-not-allowed disabled:opacity-40 disabled:active:scale-100",
   ];
 
   const sizes = {
