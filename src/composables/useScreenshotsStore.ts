@@ -20,7 +20,7 @@ export interface ScreenshotItem {
   localBottomRatio: number;
 }
 
-export interface JoinedSnapshot {
+export interface SplicedSnapshot {
   id: string;
   image: ImageBitmap;
   topRatio: number;
@@ -44,7 +44,7 @@ export const useScreenshotsStore = createGlobalState(() => {
   const workspaceReady = ref(typeof indexedDB === "undefined");
   const blobSourceById = new Map<string, Blob>();
 
-  const snapshots = computed<JoinedSnapshot[]>(() =>
+  const snapshots = computed<SplicedSnapshot[]>(() =>
     items.value.map((item, i, arr) => ({
       id: item.id,
       image: item.image,

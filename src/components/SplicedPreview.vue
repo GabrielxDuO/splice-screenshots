@@ -1,22 +1,22 @@
 <script setup lang="ts">
 import { useDebounceFn } from "@vueuse/core";
 import { computed, onMounted, ref, useTemplateRef, watch } from "vue";
-import IconDownload from "~icons/lucide/download";
 import IconImageOff from "~icons/lucide/image-off";
+import IconSave from "~icons/lucide/save";
 
 import PaneScroll from "@/components/PaneScroll.vue";
 import AppButton from "@/components/ui/AppButton.vue";
 import { useI18n } from "@/composables/useI18n";
 import { useScreenshotsStore } from "@/composables/useScreenshotsStore";
 
-import { canvasToBlob, drawJoinedScreenshot } from "@/utils/canvas";
+import { canvasToBlob, drawSplicedScreenshot } from "@/utils/canvas";
 import { downloadBlob } from "@/utils/image";
 
 const { t } = useI18n();
 const store = useScreenshotsStore();
 
 const canvas = useTemplateRef<HTMLCanvasElement>("canvas");
-const downloading = ref(false);
+const saving = ref(false);
 
 const hasImages = computed(() => store.snapshots.value.length > 0);
 
@@ -24,25 +24,25 @@ const redraw = useDebounceFn(() => {
   const el = canvas.value;
   if (!el)
     return;
-  drawJoinedScreenshot(el, store.snapshots.value);
+  drawSplicedScreenshot(el, store.snapshots.value);
 }, 60);
 
 onMounted(redraw);
 watch(() => store.snapshots.value, () => redraw(), { deep: true });
 
-async function handleDownload() {
+async function handleSave() {
   const el = canvas.value;
-  if (!el || !hasImages.value || downloading.value)
+  if (!el || !hasImages.value || saving.value)
     return;
-  downloading.value = true;
+  saving.value = true;
   try {
     const blob = await canvasToBlob(el, "image/jpeg", 0.95);
     if (!blob)
       return;
-    downloadBlob(blob, `${t("download_filename")}.jpg`);
+    downloadBlob(blob, `${t("save_filename")}.jpg`);
   }
   finally {
-    downloading.value = false;
+    saving.value = false;
   }
 }
 </script>
@@ -100,11 +100,11 @@ async function handleDownload() {
               variant="primary"
               size="lg"
               block
-              :disabled="!hasImages || downloading"
-              @click="handleDownload"
+              :disabled="!hasImages || saving"
+              @click="handleSave"
             >
-              <IconDownload />
-              <span>{{ t("download") }}</span>
+              <IconSave />
+              <span>{{ t("save") }}</span>
             </AppButton>
           </div>
         </div>
@@ -119,11 +119,11 @@ async function handleDownload() {
         variant="primary"
         size="lg"
         block
-        :disabled="!hasImages || downloading"
-        @click="handleDownload"
+        :disabled="!hasImages || saving"
+        @click="handleSave"
       >
-        <IconDownload />
-        <span>{{ t("download") }}</span>
+        <IconSave />
+        <span>{{ t("save") }}</span>
       </AppButton>
     </div>
   </section>

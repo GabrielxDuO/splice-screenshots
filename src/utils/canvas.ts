@@ -1,8 +1,8 @@
-import type { JoinedSnapshot } from "@/composables/useScreenshotsStore";
+import type { SplicedSnapshot } from "@/composables/useScreenshotsStore";
 
-export function drawJoinedScreenshot(
+export function drawSplicedScreenshot(
   canvas: HTMLCanvasElement,
-  snapshots: JoinedSnapshot[],
+  snapshots: SplicedSnapshot[],
 ): void {
   const ctx = canvas.getContext("2d");
   if (!ctx)

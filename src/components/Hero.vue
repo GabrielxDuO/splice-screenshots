@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import IconDownload from "~icons/lucide/download";
 import IconImagePlus from "~icons/lucide/image-plus";
 import IconMoveVertical from "~icons/lucide/move-vertical";
+import IconSave from "~icons/lucide/save";
 import IconUpload from "~icons/lucide/upload";
 
 import AppButton from "@/components/ui/AppButton.vue";
@@ -16,7 +16,7 @@ const { pick } = useAddScreenshots();
 const steps = computed(() => [
   { icon: IconImagePlus, text: t("step_add") },
   { icon: IconMoveVertical, text: t("step_drag") },
-  { icon: IconDownload, text: t("step_download") },
+  { icon: IconSave, text: t("step_save") },
 ]);
 </script>
 

@@ -12,14 +12,14 @@ const zhCN = {
 
   add: "添加截图",
   add_more: "继续添加",
-  download: "下载拼接图",
+  save: "保存拼接图",
   clear_all: "清空全部",
 
   empty_title: "拖拽截图到这里",
   empty_subtitle: "也可以点击下方按钮选择文件，本地完成拼接，不上传服务器。",
   step_add: "添加多张截图",
   step_drag: "拖动手柄选择字幕区域",
-  step_download: "下载拼接结果",
+  step_save: "保存拼接结果",
 
   drop_overlay_title: "松开鼠标导入截图",
   drop_overlay_hint: "支持一次拖入多张图片",
@@ -48,7 +48,7 @@ const zhCN = {
   workspace_resize_hint: "拖动调整宽度，双击恢复默认布局",
   workspace_loading: "载入本地记录…",
 
-  download_filename: "拼接截图",
+  save_filename: "拼接截图",
 
   tips_button: "使用提示",
   tips_modal_title: "你可能不知道的功能",
@@ -70,7 +70,7 @@ const enUS: Record<MessageKey, string> = {
 
   add: "Add screenshots",
   add_more: "Add more",
-  download: "Download",
+  save: "Save spliced image",
   clear_all: "Clear all",
 
   empty_title: "Drop screenshots here",
@@ -78,7 +78,7 @@ const enUS: Record<MessageKey, string> = {
     "Or click the button below. Everything runs locally — nothing is uploaded.",
   step_add: "Add multiple screenshots",
   step_drag: "Drag the handles to select subtitle area",
-  step_download: "Download the joined image",
+  step_save: "Save the spliced image",
 
   drop_overlay_title: "Release to import",
   drop_overlay_hint: "Drop one or more images at once",
@@ -107,14 +107,14 @@ const enUS: Record<MessageKey, string> = {
   workspace_resize_hint: "Drag to resize, double-click to reset the layout",
   workspace_loading: "Loading saved screenshots…",
 
-  download_filename: "joined-screenshot",
+  save_filename: "spliced-screenshot",
 
   tips_button: "Tips",
   tips_modal_title: "Less obvious features",
   tips_modal_close: "Close",
   tips_modal_intro: "A few easy-to-miss controls:",
   tips_para_handles:
-    "Drag a horizontal handle on a screenshot to adjust the crop used in the joined image.",
+    "Drag a horizontal handle on a screenshot to adjust the crop used in the spliced image.",
   tips_para_double:
     "Double-click a horizontal handle to switch between local crop and global crop. Alt (⌥)-drag also enters local crop.",
   tips_para_splitter:

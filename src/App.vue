@@ -7,8 +7,8 @@ import IconLayoutPanelLeft from "~icons/lucide/layout-panel-left";
 
 import AppHeader from "@/components/AppHeader.vue";
 import DropZone from "@/components/DropZone.vue";
-import JoinedPreview from "@/components/JoinedPreview.vue";
 import SourceList from "@/components/SourceList.vue";
+import SplicedPreview from "@/components/SplicedPreview.vue";
 import Segmented from "@/components/ui/Segmented.vue";
 import WorkspaceDivider from "@/components/WorkspaceDivider.vue";
 import { useI18n } from "@/composables/useI18n";
@@ -80,7 +80,7 @@ useEventListener(typeof window !== "undefined" ? window : null, "dragover", (e) 
             mobileTab === 'preview' ? 'flex flex-1' : 'hidden md:flex',
           ]"
         >
-          <JoinedPreview class="min-h-0 w-full min-w-0 flex-1" />
+          <SplicedPreview class="min-h-0 w-full min-w-0 flex-1" />
         </div>
       </div>
     </div>
