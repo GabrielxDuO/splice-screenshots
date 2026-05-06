@@ -57,7 +57,7 @@ const showHero = computed(() => store.workspaceReady.value && isEmpty.value);
 
           <TransitionGroup
             tag="div"
-            class="source-masonry min-w-0 w-full"
+            class="flex min-w-0 w-full flex-col gap-4"
             enter-active-class="transition-[opacity,transform] duration-300 ease-out motion-reduce:transition-none"
             enter-from-class="opacity-0 translate-y-2 scale-[0.99]"
             leave-active-class="transition-[opacity,transform] duration-150 ease-in motion-reduce:transition-none"
@@ -67,7 +67,7 @@ const showHero = computed(() => store.workspaceReady.value && isEmpty.value);
             <ScreenshotItem
               v-for="(item, i) in store.items.value"
               :key="item.id"
-              class="source-masonry-item min-w-0"
+              class="min-w-0"
               :item="item"
               :index="i"
               :total="store.items.value.length"

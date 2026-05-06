@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { ScreenshotItem } from "@/composables/useScreenshotsStore";
-import { computed, nextTick, onBeforeUnmount, onMounted, ref, useTemplateRef, watch } from "vue";
+import { computed, onBeforeUnmount, onMounted, ref, useTemplateRef, watch } from "vue";
 import IconArrowDown from "~icons/lucide/arrow-down";
 import IconArrowUp from "~icons/lucide/arrow-up";
 
@@ -24,10 +24,8 @@ const { t } = useI18n();
 const store = useScreenshotsStore();
 
 const canvas = useTemplateRef<HTMLCanvasElement>("canvas");
-const article = useTemplateRef<HTMLElement>("article");
 const view = useTemplateRef<HTMLDivElement>("view");
 const focusedHandle = ref<Edge | null>(null);
-const masonrySpan = ref(1);
 
 const isFirst = computed(() => props.index === 0);
 const isLast = computed(() => props.index === props.total - 1);
@@ -62,48 +60,10 @@ function drawImage() {
   ctx.drawImage(image, 0, 0);
 }
 
-const masonryStyle = computed(() => ({
-  gridRowEnd: `span ${masonrySpan.value}`,
-}));
-
-const masonryRowHeight = 1;
-const masonryGap = 16;
-let resizeObserver: ResizeObserver | null = null;
-let masonryFrame = 0;
-
-function updateMasonrySpan() {
-  const el = article.value;
-  if (!el)
-    return;
-  masonrySpan.value = Math.max(
-    1,
-    Math.ceil((el.getBoundingClientRect().height + masonryGap) / masonryRowHeight),
-  );
-}
-
-function scheduleMasonrySpanUpdate() {
-  if (masonryFrame)
-    return;
-  masonryFrame = requestAnimationFrame(() => {
-    masonryFrame = 0;
-    updateMasonrySpan();
-  });
-}
-
-onMounted(() => {
-  drawImage();
-  if (typeof ResizeObserver !== "undefined" && article.value) {
-    resizeObserver = new ResizeObserver(() => scheduleMasonrySpanUpdate());
-    resizeObserver.observe(article.value);
-  }
-  void nextTick(scheduleMasonrySpanUpdate);
-});
+onMounted(drawImage);
 watch(
   () => props.item.image,
-  () => {
-    drawImage();
-    void nextTick(updateMasonrySpan);
-  },
+  () => drawImage(),
 );
 
 type Edge = "top" | "bottom";
@@ -206,9 +166,6 @@ function clamp(v: number, min: number, max: number): number {
 
 onBeforeUnmount(() => {
   dragging = null;
-  resizeObserver?.disconnect();
-  if (masonryFrame)
-    cancelAnimationFrame(masonryFrame);
 });
 
 const aspectStyle = computed(() => ({
@@ -239,9 +196,7 @@ function handleStackClass(edge: Edge): string {
 
 <template>
   <article
-    ref="article"
     class="group relative overflow-hidden rounded-2xl bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04)] ring-1 ring-black/6 dark:bg-neutral-900 dark:ring-white/6"
-    :style="masonryStyle"
   >
     <div class="flex items-center justify-between gap-2 px-3 py-2">
       <span
