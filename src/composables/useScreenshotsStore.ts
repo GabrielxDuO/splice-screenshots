@@ -27,6 +27,9 @@ export interface JoinedSnapshot {
   bottomRatio: number;
 }
 
+const DEFAULT_TOP_RATIO = 0.85;
+const DEFAULT_BOTTOM_RATIO = 1;
+
 function uid(): string {
   if (typeof crypto !== "undefined" && "randomUUID" in crypto) {
     return crypto.randomUUID();
@@ -36,8 +39,8 @@ function uid(): string {
 
 export const useScreenshotsStore = createGlobalState(() => {
   const items = ref<ScreenshotItem[]>([]);
-  const topRatio = ref(0.85);
-  const bottomRatio = ref(1);
+  const topRatio = ref(DEFAULT_TOP_RATIO);
+  const bottomRatio = ref(DEFAULT_BOTTOM_RATIO);
   const workspaceReady = ref(typeof indexedDB === "undefined");
   const blobSourceById = new Map<string, Blob>();
 
@@ -200,8 +203,12 @@ export const useScreenshotsStore = createGlobalState(() => {
     for (const item of items.value)
       item.image.close?.();
     items.value = [];
+    topRatio.value = DEFAULT_TOP_RATIO;
+    bottomRatio.value = DEFAULT_BOTTOM_RATIO;
     blobSourceById.clear();
-    void screenshotsIdbClear().catch(e => console.error("[splice] idb clear", e));
+    persistChain = persistChain
+      .then(() => screenshotsIdbClear())
+      .catch(e => console.error("[splice] idb clear", e));
   }
 
   function setGlobalTop(value: number) {
