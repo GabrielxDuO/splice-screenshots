@@ -23,7 +23,7 @@ onMounted(() => {
 });
 
 const workspaceRef = useTemplateRef<HTMLElement>("workspace");
-const { dragging, leftPaneStyle, onResizePointerDown } = useWorkspaceSplit(workspaceRef);
+const { dragging, leftPaneStyle, onResizePointerDown, resetSplit } = useWorkspaceSplit(workspaceRef);
 
 useHead({
   title: () => t("app_title"),
@@ -68,7 +68,11 @@ useEventListener(typeof window !== "undefined" ? window : null, "dragover", (e) 
           <SourceList class="min-h-0 w-full min-w-0 flex-1" />
         </div>
 
-        <WorkspaceDivider :dragging="dragging" @pointerdown="onResizePointerDown" />
+        <WorkspaceDivider
+          :dragging="dragging"
+          @dblclick="resetSplit"
+          @pointerdown="onResizePointerDown"
+        />
 
         <div
           class="flex min-h-0 min-w-0 flex-col overflow-hidden md:flex-1"

@@ -36,6 +36,10 @@ export function useWorkspaceSplit(workspaceRef: Ref<HTMLElement | null>) {
     return { flex: `0 0 ${split.value}%` };
   });
 
+  function resetSplit() {
+    split.value = DEFAULT_PCT;
+  }
+
   function onResizePointerDown(e: PointerEvent) {
     if (!isDesktop.value || e.button !== 0)
       return;
@@ -84,5 +88,6 @@ export function useWorkspaceSplit(workspaceRef: Ref<HTMLElement | null>) {
     isDesktop,
     leftPaneStyle,
     onResizePointerDown,
+    resetSplit,
   };
 }

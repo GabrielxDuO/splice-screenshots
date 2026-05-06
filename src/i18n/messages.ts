@@ -45,7 +45,7 @@ const zhCN = {
   tab_preview: "预览",
 
   workspace_resize_handle: "拖动调整左右区域宽度",
-  workspace_resize_hint: "按住并左右拖动，调整源截图与预览区域的宽度",
+  workspace_resize_hint: "拖动调整宽度，双击恢复默认布局",
   workspace_loading: "载入本地记录…",
 
   download_filename: "拼接截图",
@@ -53,13 +53,13 @@ const zhCN = {
   tips_button: "使用提示",
   tips_modal_title: "你可能不知道的功能",
   tips_modal_close: "关闭",
-  tips_modal_intro: "下面这些能力在界面上没有单独标出来，可以这样用：",
-  tips_para_handles: "在两张截图之间的横条手柄上拖动，可调整每张图参与拼接的上下裁切边界。",
+  tips_modal_intro: "几个容易漏掉的小操作：",
+  tips_para_handles: "拖动截图上的横条，可调整参与拼接的上下裁切边界。",
   tips_para_double:
-    "在每张图上方或下方的细横条手柄上快速连点两次（或触控双击），可在「该图独立字幕裁切比例」与「跟随全局比例」之间切换。若当前为跟随全局，也可按住 Alt（⌥）拖动手柄切入独立比例；已是独立比例时，再按住 Alt 拖动只会调该图手柄，不会切回全局。",
-  tips_para_splitter: "在较宽的屏幕上，拖动中间竖向分隔条可调整左侧列表与右侧预览区域的宽度。",
-  tips_para_persist: "截图列表会自动保存在本机浏览器（IndexedDB），刷新页面后仍会保留，直到你清空或清除站点数据。",
-  tips_para_drop: "把图片拖到浏览器窗口的任意位置（不仅左侧空白区）即可导入。",
+    "双击横条，可在「单张独立裁切」和「跟随全局裁切」之间切换；按住 Alt（⌥）拖动也能进入独立裁切。",
+  tips_para_splitter: "宽屏时拖动中间分隔条可调整左右宽度，双击分隔条可恢复默认布局。",
+  tips_para_persist: "截图会保存在本机浏览器，刷新后仍会保留，直到你清空或清除站点数据。",
+  tips_para_drop: "把图片拖到窗口任意位置即可导入。",
 } as const;
 
 export type MessageKey = keyof typeof zhCN;
@@ -104,7 +104,7 @@ const enUS: Record<MessageKey, string> = {
   tab_preview: "Preview",
 
   workspace_resize_handle: "Drag to resize panels",
-  workspace_resize_hint: "Drag sideways to resize the source list and preview",
+  workspace_resize_hint: "Drag to resize, double-click to reset the layout",
   workspace_loading: "Loading saved screenshots…",
 
   download_filename: "joined-screenshot",
@@ -112,16 +112,16 @@ const enUS: Record<MessageKey, string> = {
   tips_button: "Tips",
   tips_modal_title: "Less obvious features",
   tips_modal_close: "Close",
-  tips_modal_intro: "These shortcuts aren’t spelled out on screen, but they work:",
+  tips_modal_intro: "A few easy-to-miss controls:",
   tips_para_handles:
-    "Drag the horizontal bar between two screenshots to adjust the top/bottom crop each image contributes to the join.",
+    "Drag a horizontal handle on a screenshot to adjust the crop used in the joined image.",
   tips_para_double:
-    "Double‑click (or double‑tap) the thin horizontal handles above or below each screenshot to toggle between a local subtitle crop ratio for that shot only and the global ratio. If you’re still on the global ratio, drag a handle while holding Alt (⌥) to enter local mode; once local, Alt‑dragging only adjusts that image and does not switch back to global.",
+    "Double-click a horizontal handle to switch between local crop and global crop. Alt (⌥)-drag also enters local crop.",
   tips_para_splitter:
-    "On wide layouts, drag the vertical splitter between the source list and preview to resize both panels.",
+    "On wide layouts, drag the center splitter to resize both panels. Double-click it to reset the layout.",
   tips_para_persist:
-    "Your screenshot list is saved locally in IndexedDB and survives refresh until you clear it or wipe site data.",
-  tips_para_drop: "Drop images anywhere on the browser window—not only on the empty left pane—to import.",
+    "Screenshots are saved in this browser and survive refresh until you clear them or wipe site data.",
+  tips_para_drop: "Drop images anywhere on the window to import.",
 };
 
 export const messages: Record<Locale, Record<MessageKey, string>> = {
