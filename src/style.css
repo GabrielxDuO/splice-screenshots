@@ -2,6 +2,12 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+@property --stack-progress {
+  inherits: true;
+  initial-value: 0;
+  syntax: "<number>";
+}
+
 @theme {
   --font-sans:
     -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display",
@@ -10,6 +16,24 @@
 
   --color-accent: #0a84ff;
   --color-accent-hover: #0070e0;
+  --expo-out: linear(
+    0 0%,
+    0.1684 2.66%,
+    0.3165 5.49%,
+    0.446 8.52%,
+    0.5581 11.78%,
+    0.6535 15.29%,
+    0.7341 19.11%,
+    0.8011 23.3%,
+    0.8557 27.93%,
+    0.8962 32.68%,
+    0.9283 38.01%,
+    0.9529 44.08%,
+    0.9711 51.14%,
+    0.9833 59.06%,
+    0.9915 68.74%,
+    1 100%
+  );
 }
 
 @layer base {
@@ -132,6 +156,48 @@
   }
 }
 
+html.rows-stack-transition::view-transition-group(root) {
+  animation-timing-function: var(--expo-out);
+}
+
+html.rows-stack-transition::view-transition-old(root) {
+  animation: none;
+}
+
+html.rows-stack-transition::view-transition-new(root) {
+  z-index: 2;
+  animation: rows-stack 0.72s;
+  animation-fill-mode: both;
+  animation-timing-function: cubic-bezier(0.9, 0, 0.08, 1);
+}
+
+html.rows-stack-transition-down::view-transition-new(root) {
+  clip-path: inset(0 0 calc((100 - var(--stack-progress)) * 1%) 0);
+}
+
+html.rows-stack-transition-up::view-transition-new(root) {
+  clip-path: inset(calc((100 - var(--stack-progress)) * 1%) 0 0 0);
+}
+
+.app-theme-control {
+  view-transition-name: theme-control;
+}
+
+html.rows-stack-transition::view-transition-group(theme-control) {
+  z-index: 3;
+  animation: none;
+}
+
+html.rows-stack-transition::view-transition-old(theme-control) {
+  animation: none;
+  opacity: 0;
+}
+
+html.rows-stack-transition::view-transition-new(theme-control) {
+  animation: none;
+  opacity: 1;
+}
+
 @keyframes app-fade-up {
   from {
     opacity: 0;
@@ -153,5 +219,49 @@
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes rows-stack {
+  0% {
+    --stack-progress: 0;
+  }
+
+  7% {
+    --stack-progress: 4;
+  }
+
+  14% {
+    --stack-progress: 28;
+  }
+
+  18%,
+  42% {
+    --stack-progress: 34;
+  }
+
+  46% {
+    --stack-progress: 38;
+  }
+
+  56% {
+    --stack-progress: 62;
+  }
+
+  60%,
+  84% {
+    --stack-progress: 67;
+  }
+
+  88% {
+    --stack-progress: 74;
+  }
+
+  98% {
+    --stack-progress: 98;
+  }
+
+  100% {
+    --stack-progress: 100;
   }
 }

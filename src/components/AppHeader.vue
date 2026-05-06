@@ -27,10 +27,59 @@ const localeOptions = computed(() => [
   { value: "en-US" as const, label: "EN" },
 ]);
 
+function resolveDark(value: "light" | "dark" | "auto") {
+  if (value === "dark")
+    return true;
+  if (value === "light")
+    return false;
+
+  return window.matchMedia("(prefers-color-scheme: dark)").matches;
+}
+
+async function setTheme(value: "light" | "dark" | "auto") {
+  if (value === prefs.theme.store.value) {
+    return;
+  }
+
+  if (
+    typeof document === "undefined"
+    || typeof window === "undefined"
+    || !document.startViewTransition
+    || window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  ) {
+    prefs.theme.store.value = value;
+    return;
+  }
+
+  const wasDark = document.documentElement.classList.contains("dark");
+  const willBeDark = resolveDark(value);
+
+  if (wasDark === willBeDark) {
+    prefs.theme.store.value = value;
+    return;
+  }
+
+  const transitionClass = willBeDark
+    ? "rows-stack-transition-down"
+    : "rows-stack-transition-up";
+  document.documentElement.classList.add("rows-stack-transition", transitionClass);
+
+  const transition = document.startViewTransition(() => {
+    prefs.theme.store.value = value;
+  });
+
+  try {
+    await transition.finished;
+  }
+  finally {
+    document.documentElement.classList.remove("rows-stack-transition", transitionClass);
+  }
+}
+
 const themeModel = computed({
   get: () => prefs.theme.store.value as "light" | "dark" | "auto",
   set: (v) => {
-    prefs.theme.store.value = v;
+    void setTheme(v);
   },
 });
 </script>
@@ -56,7 +105,7 @@ const themeModel = computed({
           <IconCircleHelp />
         </IconButton>
 
-        <div class="hidden sm:block">
+        <div class="app-theme-control hidden sm:block">
           <Segmented
             v-model="themeModel"
             :options="themeOptions"
