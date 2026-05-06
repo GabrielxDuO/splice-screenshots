@@ -2,7 +2,31 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-@property --stack-progress {
+@property --column-one {
+  inherits: true;
+  initial-value: 0;
+  syntax: "<number>";
+}
+
+@property --column-two {
+  inherits: true;
+  initial-value: 0;
+  syntax: "<number>";
+}
+
+@property --column-three {
+  inherits: true;
+  initial-value: 0;
+  syntax: "<number>";
+}
+
+@property --column-four {
+  inherits: true;
+  initial-value: 0;
+  syntax: "<number>";
+}
+
+@property --column-five {
   inherits: true;
   initial-value: 0;
   syntax: "<number>";
@@ -170,46 +194,69 @@
   }
 }
 
-html.rows-stack-transition::view-transition-group(root) {
+html.columns-slide-transition::view-transition-group(root) {
   animation-timing-function: var(--expo-out);
 }
 
-html.rows-stack-transition::view-transition-old(root) {
+html.columns-slide-transition::view-transition-old(root) {
   animation: none;
 }
 
-html.rows-stack-transition::view-transition-new(root) {
+html.columns-slide-transition::view-transition-new(root) {
+  --speed: 0.625;
   z-index: 2;
-  animation: rows-stack 0.72s;
+  animation:
+    column-one calc(var(--speed) * 1s)
+      calc(sin((4 / 5) * 45deg) * var(--speed) * 1s),
+    column-two calc(var(--speed) * 1s)
+      calc(sin((3 / 5) * 45deg) * var(--speed) * 1s),
+    column-three calc(var(--speed) * 1s)
+      calc(sin((2 / 5) * 45deg) * var(--speed) * 1s),
+    column-four calc(var(--speed) * 1s)
+      calc(sin((1 / 5) * 45deg) * var(--speed) * 1s),
+    column-five calc(var(--speed) * 1s)
+      calc(sin((0 / 5) * 45deg) * var(--speed) * 1s);
   animation-fill-mode: both;
-  animation-timing-function: cubic-bezier(0.9, 0, 0.08, 1);
-}
-
-html.rows-stack-transition-down::view-transition-new(root) {
-  clip-path: inset(0 0 calc((100 - var(--stack-progress)) * 1%) 0);
-}
-
-html.rows-stack-transition-up::view-transition-new(root) {
-  clip-path: inset(calc((100 - var(--stack-progress)) * 1%) 0 0 0);
-}
-
-.app-theme-control {
-  view-transition-name: theme-control;
-}
-
-html.rows-stack-transition::view-transition-group(theme-control) {
-  z-index: 3;
-  animation: none;
-}
-
-html.rows-stack-transition::view-transition-old(theme-control) {
-  animation: none;
-  opacity: 0;
-}
-
-html.rows-stack-transition::view-transition-new(theme-control) {
-  animation: none;
-  opacity: 1;
+  animation-timing-function: linear(
+    0 0%,
+    0.0027 3.64%,
+    0.0106 7.29%,
+    0.0425 14.58%,
+    0.0957 21.87%,
+    0.1701 29.16%,
+    0.2477 35.19%,
+    0.3401 41.23%,
+    0.5982 55.18%,
+    0.7044 61.56%,
+    0.7987 68.28%,
+    0.875 75%,
+    0.9297 81.25%,
+    0.9687 87.5%,
+    0.9922 93.75%,
+    1 100%
+  );
+  clip-path: polygon(
+    0 0,
+    0 calc(var(--column-one) * 1%),
+    20% calc(var(--column-one) * 1%),
+    20% 0,
+    20% 0,
+    20% calc(var(--column-two) * 1%),
+    40% calc(var(--column-two) * 1%),
+    40% 0,
+    40% 0,
+    40% calc(var(--column-three) * 1%),
+    60% calc(var(--column-three) * 1%),
+    60% 0,
+    60% 0,
+    60% calc(var(--column-four) * 1%),
+    80% calc(var(--column-four) * 1%),
+    80% 0,
+    80% 0,
+    80% calc(var(--column-five) * 1%),
+    100% calc(var(--column-five) * 1%),
+    100% 0
+  );
 }
 
 @keyframes app-fade-up {
@@ -236,46 +283,52 @@ html.rows-stack-transition::view-transition-new(theme-control) {
   }
 }
 
-@keyframes rows-stack {
-  0% {
-    --stack-progress: 0;
+@keyframes column-one {
+  from {
+    --column-one: 0;
   }
 
-  7% {
-    --stack-progress: 4;
+  to {
+    --column-one: 100;
+  }
+}
+
+@keyframes column-two {
+  from {
+    --column-two: 0;
   }
 
-  14% {
-    --stack-progress: 28;
+  to {
+    --column-two: 100;
+  }
+}
+
+@keyframes column-three {
+  from {
+    --column-three: 0;
   }
 
-  18%,
-  42% {
-    --stack-progress: 34;
+  to {
+    --column-three: 100;
+  }
+}
+
+@keyframes column-four {
+  from {
+    --column-four: 0;
   }
 
-  46% {
-    --stack-progress: 38;
+  to {
+    --column-four: 100;
+  }
+}
+
+@keyframes column-five {
+  from {
+    --column-five: 0;
   }
 
-  56% {
-    --stack-progress: 62;
-  }
-
-  60%,
-  84% {
-    --stack-progress: 67;
-  }
-
-  88% {
-    --stack-progress: 74;
-  }
-
-  98% {
-    --stack-progress: 98;
-  }
-
-  100% {
-    --stack-progress: 100;
+  to {
+    --column-five: 100;
   }
 }

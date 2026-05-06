@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
 import IconCircleHelp from "~icons/lucide/circle-help";
-import IconLayers from "~icons/lucide/layers";
 import IconMonitor from "~icons/lucide/monitor";
 import IconMoon from "~icons/lucide/moon";
 import IconSun from "~icons/lucide/sun";
@@ -27,15 +26,6 @@ const localeOptions = computed(() => [
   { value: "en-US" as const, label: "EN" },
 ]);
 
-function resolveDark(value: "light" | "dark" | "auto") {
-  if (value === "dark")
-    return true;
-  if (value === "light")
-    return false;
-
-  return window.matchMedia("(prefers-color-scheme: dark)").matches;
-}
-
 async function setTheme(value: "light" | "dark" | "auto") {
   if (value === prefs.theme.store.value) {
     return;
@@ -51,18 +41,8 @@ async function setTheme(value: "light" | "dark" | "auto") {
     return;
   }
 
-  const wasDark = document.documentElement.classList.contains("dark");
-  const willBeDark = resolveDark(value);
-
-  if (wasDark === willBeDark) {
-    prefs.theme.store.value = value;
-    return;
-  }
-
-  const transitionClass = willBeDark
-    ? "rows-stack-transition-down"
-    : "rows-stack-transition-up";
-  document.documentElement.classList.add("rows-stack-transition", transitionClass);
+  const transitionClass = "columns-slide-transition";
+  document.documentElement.classList.add(transitionClass);
 
   const transition = document.startViewTransition(() => {
     prefs.theme.store.value = value;
@@ -72,7 +52,7 @@ async function setTheme(value: "light" | "dark" | "auto") {
     await transition.finished;
   }
   finally {
-    document.documentElement.classList.remove("rows-stack-transition", transitionClass);
+    document.documentElement.classList.remove(transitionClass);
   }
 }
 
@@ -93,7 +73,7 @@ const themeModel = computed({
         <span
           class="grid size-8 shrink-0 place-items-center rounded-xl bg-[color-mix(in_srgb,var(--color-accent)_12%,transparent)] text-accent"
         >
-          <IconLayers class="size-[18px]" />
+          <img src="/favicon.svg" alt="" class="size-[22px]" aria-hidden="true">
         </span>
         <span class="truncate text-[15px] font-semibold tracking-tight">
           {{ t("app_title") }}
@@ -105,7 +85,7 @@ const themeModel = computed({
           <IconCircleHelp />
         </IconButton>
 
-        <div class="app-theme-control hidden sm:block">
+        <div class="hidden sm:block">
           <Segmented
             v-model="themeModel"
             :options="themeOptions"
