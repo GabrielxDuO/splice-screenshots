@@ -16,13 +16,13 @@ const zhCN = {
   clear_all: "清空全部",
 
   empty_title: "拖拽截图到这里",
-  empty_subtitle: "也可以点击下方按钮选择文件，本地完成拼接，不上传服务器。",
+  empty_subtitle: "也可以点击下方按钮选择图片或 zip，本地完成拼接，不上传服务器。",
   step_add: "添加多张截图",
   step_drag: "拖动手柄选择字幕区域",
   step_save: "保存拼接结果",
 
   drop_overlay_title: "松开鼠标导入截图",
-  drop_overlay_hint: "支持一次拖入多张图片",
+  drop_overlay_hint: "支持一次拖入多张图片或 zip",
 
   preview_empty_title: "实时预览",
   preview_empty_hint: "添加截图后会立即在此显示拼接结果。",
@@ -59,7 +59,7 @@ const zhCN = {
     "双击横条，可在「单张独立裁切」和「跟随全局裁切」之间切换；按住 Alt（⌥）拖动也能进入独立裁切。",
   tips_para_splitter: "宽屏时拖动中间分隔条可调整左右宽度，双击分隔条可恢复默认布局。",
   tips_para_persist: "截图会保存在本机浏览器，刷新后仍会保留，直到你清空或清除站点数据。",
-  tips_para_drop: "把图片拖到窗口任意位置即可导入。",
+  tips_para_drop: "把图片或 zip 拖到窗口任意位置即可导入。",
 } as const;
 
 export type MessageKey = keyof typeof zhCN;
@@ -75,13 +75,13 @@ const enUS: Record<MessageKey, string> = {
 
   empty_title: "Drop screenshots here",
   empty_subtitle:
-    "Or click the button below. Everything runs locally — nothing is uploaded.",
+    "Or click the button below to choose images or a zip. Everything runs locally — nothing is uploaded.",
   step_add: "Add multiple screenshots",
   step_drag: "Drag the handles to select subtitle area",
   step_save: "Save the spliced image",
 
   drop_overlay_title: "Release to import",
-  drop_overlay_hint: "Drop one or more images at once",
+  drop_overlay_hint: "Drop one or more images or a zip at once",
 
   preview_empty_title: "Live preview",
   preview_empty_hint: "Add screenshots and the result appears here instantly.",
@@ -121,7 +121,7 @@ const enUS: Record<MessageKey, string> = {
     "On wide layouts, drag the center splitter to resize both panels. Double-click it to reset the layout.",
   tips_para_persist:
     "Screenshots are saved in this browser and survive refresh until you clear them or wipe site data.",
-  tips_para_drop: "Drop images anywhere on the window to import.",
+  tips_para_drop: "Drop images or a zip anywhere on the window to import.",
 };
 
 export const messages: Record<Locale, Record<MessageKey, string>> = {
