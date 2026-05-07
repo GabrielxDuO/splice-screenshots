@@ -37,5 +37,23 @@ export function downloadBlob(blob: Blob, filename: string): void {
 }
 
 export function isImageFile(file: File): boolean {
-  return file.type.startsWith("image/");
+  return file.type.startsWith("image/") || imageMimeFromName(file.name) !== null;
+}
+
+const imageMimeByExtension: Record<string, string> = {
+  avif: "image/avif",
+  bmp: "image/bmp",
+  gif: "image/gif",
+  jpeg: "image/jpeg",
+  jpg: "image/jpeg",
+  png: "image/png",
+  svg: "image/svg+xml",
+  webp: "image/webp",
+};
+
+export function imageMimeFromName(name: string): string | null {
+  const extension = name.split(".").pop()?.toLowerCase();
+  if (!extension)
+    return null;
+  return imageMimeByExtension[extension] ?? null;
 }
