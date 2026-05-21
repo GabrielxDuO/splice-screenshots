@@ -16,7 +16,7 @@ export function drawSplicedScreenshot(
     return;
   }
 
-  const minWidth = Math.min(
+  const outputWidth = Math.max(
     ...snapshots.map(s => s.image.width).filter(w => w > 0),
   );
 
@@ -38,20 +38,20 @@ export function drawSplicedScreenshot(
     const sy = topRatio * image.height;
     const sBottom = bottomRatio * image.height;
     const sh = Math.max(0, sBottom - sy);
-    const dh = (sh / image.width) * minWidth;
+    const dh = (sh / image.width) * outputWidth;
     slices.push({
       image,
       sx: 0,
       sy,
       sw: image.width,
       sh,
-      dw: minWidth,
+      dw: outputWidth,
       dh,
     });
     totalHeight += dh;
   }
 
-  canvas.width = Math.max(1, Math.round(minWidth));
+  canvas.width = Math.max(1, Math.round(outputWidth));
   canvas.height = Math.max(1, Math.round(totalHeight));
 
   ctx.fillStyle = "#ffffff";
