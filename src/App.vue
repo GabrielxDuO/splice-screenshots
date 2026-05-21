@@ -11,11 +11,14 @@ import SourceList from "@/components/SourceList.vue";
 import SplicedPreview from "@/components/SplicedPreview.vue";
 import Segmented from "@/components/ui/Segmented.vue";
 import WorkspaceDivider from "@/components/WorkspaceDivider.vue";
+import { useAddScreenshots } from "@/composables/useAddScreenshots";
 import { useI18n } from "@/composables/useI18n";
 import { useScreenshotsStore } from "@/composables/useScreenshotsStore";
 import { useWorkspaceSplit } from "@/composables/useWorkspaceSplit";
+import { hasImportableDataTransferItems } from "@/utils/dataTransfer";
 
 const { t, locale } = useI18n();
+const { addFromDataTransferItems } = useAddScreenshots();
 const screenshotsStore = useScreenshotsStore();
 
 onMounted(() => {
@@ -42,6 +45,14 @@ const tabOptions = computed(() => [
 useEventListener(typeof window !== "undefined" ? window : null, "dragover", (e) => {
   e.preventDefault();
 });
+
+useEventListener(typeof window !== "undefined" ? window : null, "paste", (e) => {
+  const event = e as ClipboardEvent;
+  if (!hasImportableDataTransferItems(event.clipboardData?.items ?? null))
+    return;
+  event.preventDefault();
+  void addFromDataTransferItems(event.clipboardData?.items ?? null);
+});
 </script>
 
 <template>
@@ -59,7 +70,7 @@ useEventListener(typeof window !== "undefined" ? window : null, "dragover", (e) 
         :class="dragging ? 'cursor-col-resize select-none' : ''"
       >
         <div
-          class="flex min-h-0 min-w-0 flex-col overflow-hidden md:min-w-[240px] md:pr-3"
+          class="flex min-h-0 min-w-0 flex-col overflow-hidden md:min-w-60 md:pr-3"
           :class="[
             mobileTab === 'sources' ? 'flex-1' : 'hidden md:flex',
           ]"

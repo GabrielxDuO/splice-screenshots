@@ -5,16 +5,16 @@ import IconUpload from "~icons/lucide/upload";
 
 import { useAddScreenshots } from "@/composables/useAddScreenshots";
 import { useI18n } from "@/composables/useI18n";
-import { isImportableDataType } from "@/utils/archive";
+import { hasImportableDataTransferItems } from "@/utils/dataTransfer";
 
 const { t } = useI18n();
-const { addFromFiles } = useAddScreenshots();
+const { addFromDataTransferItems } = useAddScreenshots();
 
 const root = ref<HTMLElement | null>(null);
 
 const { isOverDropZone } = useDropZone(root, {
-  dataTypes: types => types.some(isImportableDataType),
-  onDrop: files => addFromFiles(files),
+  checkValidity: hasImportableDataTransferItems,
+  onDrop: (_files, event) => addFromDataTransferItems(event.dataTransfer?.items ?? null),
 });
 </script>
 

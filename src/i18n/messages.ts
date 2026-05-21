@@ -22,7 +22,7 @@ const zhCN = {
   step_save: "保存拼接结果",
 
   drop_overlay_title: "松开鼠标导入截图",
-  drop_overlay_hint: "支持一次拖入多张图片或 zip",
+  drop_overlay_hint: "支持拖入图片、文件夹或 zip",
 
   preview_empty_title: "实时预览",
   preview_empty_hint: "添加截图后会立即在此显示拼接结果。",
@@ -59,7 +59,7 @@ const zhCN = {
     "双击横条，可在「单张独立裁切」和「跟随全局裁切」之间切换；按住 Alt（⌥）拖动也能进入独立裁切。",
   tips_para_splitter: "宽屏时拖动中间分隔条可调整左右宽度，双击分隔条可恢复默认布局。",
   tips_para_persist: "截图会保存在本机浏览器，刷新后仍会保留，直到你清空或清除站点数据。",
-  tips_para_drop: "把图片或 zip 拖到窗口任意位置即可导入。",
+  tips_para_drop: "把图片、文件夹或 zip 拖到窗口任意位置即可导入，也可以直接粘贴剪贴板里的图片。",
 } as const;
 
 export type MessageKey = keyof typeof zhCN;
@@ -81,7 +81,7 @@ const enUS: Record<MessageKey, string> = {
   step_save: "Save the spliced image",
 
   drop_overlay_title: "Release to import",
-  drop_overlay_hint: "Drop one or more images or a zip at once",
+  drop_overlay_hint: "Drop images, folders, or a zip",
 
   preview_empty_title: "Live preview",
   preview_empty_hint: "Add screenshots and the result appears here instantly.",
@@ -121,7 +121,7 @@ const enUS: Record<MessageKey, string> = {
     "On wide layouts, drag the center splitter to resize both panels. Double-click it to reset the layout.",
   tips_para_persist:
     "Screenshots are saved in this browser and survive refresh until you clear them or wipe site data.",
-  tips_para_drop: "Drop images or a zip anywhere on the window to import.",
+  tips_para_drop: "Drop images, folders, or a zip anywhere on the window, or paste an image from the clipboard.",
 };
 
 export const messages: Record<Locale, Record<MessageKey, string>> = {

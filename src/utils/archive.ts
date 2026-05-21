@@ -14,10 +14,6 @@ export function isZipFile(file: File): boolean {
     || (zipMimeTypes.has(file.type) && file.name.toLowerCase().endsWith(".zip"));
 }
 
-export function isImportableDataType(type: string): boolean {
-  return type === "Files" || type.startsWith("image/") || zipMimeTypes.has(type);
-}
-
 export async function expandImportableImages(files: FileList | File[]): Promise<File[]> {
   const images: File[] = [];
   for (const file of Array.from(files)) {
