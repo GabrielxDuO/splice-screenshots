@@ -16,9 +16,9 @@ const tipsOpen = ref(false);
 const prefs = usePreferencesStore();
 
 const themeOptions = computed(() => [
-  { value: "light" as const, icon: IconSun, ariaLabel: t("theme_light") },
-  { value: "auto" as const, icon: IconMonitor, ariaLabel: t("theme_auto") },
-  { value: "dark" as const, icon: IconMoon, ariaLabel: t("theme_dark") },
+  { value: "light" as const, icon: IconSun, ariaLabel: t("theme.light") },
+  { value: "auto" as const, icon: IconMonitor, ariaLabel: t("theme.auto") },
+  { value: "dark" as const, icon: IconMoon, ariaLabel: t("theme.dark") },
 ]);
 
 const localeOptions = computed(() => [
@@ -76,12 +76,12 @@ const themeModel = computed({
           <img src="/favicon.svg" alt="" class="size-[22px]" aria-hidden="true">
         </span>
         <span class="truncate text-[15px] font-semibold tracking-tight">
-          {{ t("app_title") }}
+          {{ $t("app.title") }}
         </span>
       </div>
 
       <div class="flex shrink-0 items-center gap-2">
-        <IconButton variant="soft" size="sm" :label="t('tips_button')" @click="tipsOpen = true">
+        <IconButton variant="soft" size="sm" :label="$t('tips.button')" @click="tipsOpen = true">
           <IconCircleHelp />
         </IconButton>
 
@@ -89,7 +89,7 @@ const themeModel = computed({
           <Segmented
             v-model="themeModel"
             :options="themeOptions"
-            :aria-label="t('theme')"
+            :aria-label="$t('theme.label')"
             size="sm"
           />
         </div>
@@ -97,7 +97,7 @@ const themeModel = computed({
         <Segmented
           v-model="locale"
           :options="localeOptions"
-          :aria-label="t('language')"
+          :aria-label="$t('language.label')"
           size="sm"
         />
       </div>

@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import IconGripVertical from "~icons/lucide/grip-vertical";
 
-import { useI18n } from "@/composables/useI18n";
-
 defineProps<{
   dragging?: boolean;
 }>();
@@ -11,8 +9,6 @@ defineEmits<{
   dblclick: [];
   pointerdown: [e: PointerEvent];
 }>();
-
-const { t } = useI18n();
 </script>
 
 <template>
@@ -22,8 +18,8 @@ const { t } = useI18n();
     <button
       type="button"
       class="group pointer-events-auto absolute inset-y-0 left-1/2 z-10 flex w-8 -translate-x-1/2 cursor-col-resize touch-none flex-col items-center justify-center border-0 bg-transparent p-0 outline-none"
-      :aria-label="t('workspace_resize_handle')"
-      :title="t('workspace_resize_hint')"
+      :aria-label="$t('workspace.resize.handle')"
+      :title="$t('workspace.resize.hint')"
       @dblclick="$emit('dblclick')"
       @pointerdown="$emit('pointerdown', $event)"
     >

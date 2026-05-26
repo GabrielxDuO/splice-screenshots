@@ -4,10 +4,8 @@ import { ref } from "vue";
 import IconUpload from "~icons/lucide/upload";
 
 import { useAddScreenshots } from "@/composables/useAddScreenshots";
-import { useI18n } from "@/composables/useI18n";
 import { hasImportableDataTransferItems } from "@/utils/dataTransfer";
 
-const { t } = useI18n();
 const { addFromDataTransferItems } = useAddScreenshots();
 
 const root = ref<HTMLElement | null>(null);
@@ -41,10 +39,10 @@ const { isOverDropZone } = useDropZone(root, {
             <IconUpload class="size-6" />
           </span>
           <p class="text-[15px] font-semibold tracking-tight">
-            {{ t("drop_overlay_title") }}
+            {{ $t("drop.overlay.title") }}
           </p>
           <p class="text-[13px] text-neutral-500 dark:text-neutral-400">
-            {{ t("drop_overlay_hint") }}
+            {{ $t("drop.overlay.hint") }}
           </p>
         </div>
       </div>

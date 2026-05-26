@@ -6,7 +6,6 @@ import IconArrowUp from "~icons/lucide/arrow-up";
 
 import IconX from "~icons/lucide/x";
 import IconButton from "@/components/ui/IconButton.vue";
-import { useI18n } from "@/composables/useI18n";
 import { useScreenshotsStore } from "@/composables/useScreenshotsStore";
 
 import { consumeAltChordToggle } from "@/utils/altChordLatch";
@@ -20,7 +19,6 @@ interface Props {
 
 const props = defineProps<Props>();
 
-const { t } = useI18n();
 const store = useScreenshotsStore();
 
 const canvas = useTemplateRef<HTMLCanvasElement>("canvas");
@@ -206,7 +204,7 @@ function handleStackClass(edge: Edge): string {
       </span>
       <div class="flex items-center gap-0.5">
         <IconButton
-          :label="t('move_up')"
+          :label="$t('screenshot.moveUp')"
           :disabled="isFirst"
           size="sm"
           @click="store.moveUp(item.id)"
@@ -214,7 +212,7 @@ function handleStackClass(edge: Edge): string {
           <IconArrowUp />
         </IconButton>
         <IconButton
-          :label="t('move_down')"
+          :label="$t('screenshot.moveDown')"
           :disabled="isLast"
           size="sm"
           @click="store.moveDown(item.id)"
@@ -222,7 +220,7 @@ function handleStackClass(edge: Edge): string {
           <IconArrowDown />
         </IconButton>
         <IconButton
-          :label="t('remove')"
+          :label="$t('screenshot.remove')"
           size="sm"
           @click="store.remove(item.id)"
         >
@@ -256,7 +254,7 @@ function handleStackClass(edge: Edge): string {
           item.useLocalRatio ? 'before:bg-accent' : 'before:bg-white/95 dark:before:bg-white/85',
         ]"
         :style="{ top: topPercent }"
-        :aria-label="t('move_up')"
+        :aria-label="$t('screenshot.moveUp')"
         @pointerdown="event => onHandleDown(event, 'top')"
         @pointermove="onHandleMove"
         @pointerup="onHandleUp"
@@ -275,7 +273,7 @@ function handleStackClass(edge: Edge): string {
           item.useLocalRatio ? 'before:bg-accent' : 'before:bg-white/95 dark:before:bg-white/85',
         ]"
         :style="{ top: bottomPercent }"
-        :aria-label="t('move_down')"
+        :aria-label="$t('screenshot.moveDown')"
         @pointerdown="event => onHandleDown(event, 'bottom')"
         @pointermove="onHandleMove"
         @pointerup="onHandleUp"

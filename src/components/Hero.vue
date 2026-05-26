@@ -14,9 +14,9 @@ const { t } = useI18n();
 const { pick } = useAddScreenshots();
 
 const steps = computed(() => [
-  { icon: IconImagePlus, text: t("step_add") },
-  { icon: IconMoveVertical, text: t("step_drag") },
-  { icon: IconSave, text: t("step_save") },
+  { icon: IconImagePlus, text: t("steps.add") },
+  { icon: IconMoveVertical, text: t("steps.drag") },
+  { icon: IconSave, text: t("steps.save") },
 ]);
 </script>
 
@@ -37,17 +37,17 @@ const steps = computed(() => [
             <IconUpload class="size-7" />
           </span>
           <p class="text-center text-[15px] font-medium tracking-tight">
-            {{ t("empty_title") }}
+            {{ $t("empty.title") }}
           </p>
           <p class="text-center text-[13px] leading-relaxed text-neutral-500 dark:text-neutral-400">
-            {{ t("empty_subtitle") }}
+            {{ $t("empty.subtitle") }}
           </p>
         </div>
       </div>
 
       <AppButton class="app-animate-fade-up mt-6 w-full" variant="primary" size="lg" block @click="pick()">
         <IconImagePlus />
-        <span>{{ t("add") }}</span>
+        <span>{{ $t("actions.add") }}</span>
       </AppButton>
 
       <ul class="app-animate-fade-up mt-10 w-full space-y-2.5">

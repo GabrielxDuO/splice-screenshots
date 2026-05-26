@@ -1,7 +1,7 @@
-import type { Locale } from "@/i18n/messages";
+import type { Locale } from "@/i18n/locales";
 import { createGlobalState, useColorMode, useLocalStorage } from "@vueuse/core";
 
-import { locales } from "@/i18n/messages";
+import { locales } from "@/i18n/locales";
 
 function detectLocale(): Locale {
   if (import.meta.env.SSR || typeof navigator === "undefined")

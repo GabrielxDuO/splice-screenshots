@@ -1,0 +1,81 @@
+{
+  "app": {
+    "title": "Splice Screenshots"
+  },
+  "meta": {
+    "description": "Splice screenshots in the browser. Runs locally — nothing is uploaded."
+  },
+  "actions": {
+    "add": "Add screenshots",
+    "addMore": "Add more",
+    "save": "Save spliced image",
+    "clearAll": "Clear all"
+  },
+  "empty": {
+    "title": "Drop screenshots here",
+    "subtitle": "Or click the button below to choose images or a zip. Everything runs locally — nothing is uploaded."
+  },
+  "steps": {
+    "add": "Add multiple screenshots",
+    "drag": "Drag the handles to select subtitle area",
+    "save": "Save the spliced image"
+  },
+  "drop": {
+    "overlay": {
+      "title": "Release to import",
+      "hint": "Drop images, folders, or a zip"
+    }
+  },
+  "preview": {
+    "empty": {
+      "title": "Live preview",
+      "hint": "Add screenshots and the result appears here instantly."
+    }
+  },
+  "screenshot": {
+    "moveUp": "Move up",
+    "moveDown": "Move down",
+    "remove": "Remove",
+    "toggleLocalRatio": "Toggle local / global ratio",
+    "useLocalRatioHint": "Switched to local ratio for this screenshot only",
+    "useGlobalRatioHint": "Switched back to global ratio"
+  },
+  "theme": {
+    "label": "Theme",
+    "light": "Light",
+    "dark": "Dark",
+    "auto": "Auto"
+  },
+  "language": {
+    "label": "Language"
+  },
+  "tabs": {
+    "sources": "Sources",
+    "preview": "Preview"
+  },
+  "workspace": {
+    "resize": {
+      "handle": "Drag to resize panels",
+      "hint": "Drag to resize, double-click to reset the layout"
+    },
+    "loading": "Loading saved screenshots…"
+  },
+  "save": {
+    "filename": "spliced-screenshot"
+  },
+  "tips": {
+    "button": "Tips",
+    "modal": {
+      "title": "Less obvious features",
+      "close": "Close",
+      "intro": "A few easy-to-miss controls:"
+    },
+    "paragraphs": {
+      "handles": "Drag a horizontal handle on a screenshot to adjust the crop used in the spliced image.",
+      "double": "Double-click a horizontal handle to switch between local crop and global crop. Alt (⌥)-drag also enters local crop.",
+      "splitter": "On wide layouts, drag the center splitter to resize both panels. Double-click it to reset the layout.",
+      "persist": "Screenshots are saved in this browser and survive refresh until you clear them or wipe site data.",
+      "drop": "Drop images, folders, or a zip anywhere on the window, or paste an image from the clipboard."
+    }
+  }
+}

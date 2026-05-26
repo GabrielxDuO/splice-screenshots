@@ -39,7 +39,7 @@ async function handleSave() {
     const blob = await canvasToBlob(el, "image/jpeg", 0.95);
     if (!blob)
       return;
-    downloadBlob(blob, `${t("save_filename")}.jpg`);
+    downloadBlob(blob, `${t("save.filename")}.jpg`);
   }
   finally {
     saving.value = false;
@@ -53,7 +53,7 @@ async function handleSave() {
       <div class="w-full px-4 py-6 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between gap-2 pb-3">
           <h2 class="text-[15px] font-semibold tracking-tight">
-            {{ t("preview_empty_title") }}
+            {{ $t("preview.empty.title") }}
           </h2>
           <span
             v-if="hasImages"
@@ -88,7 +88,7 @@ async function handleSave() {
                 <IconImageOff class="size-6" />
               </span>
               <p class="px-6 text-[13px] text-neutral-500 dark:text-neutral-400">
-                {{ t("preview_empty_hint") }}
+                {{ $t("preview.empty.hint") }}
               </p>
             </div>
           </Transition>
@@ -104,7 +104,7 @@ async function handleSave() {
               @click="handleSave"
             >
               <IconSave />
-              <span>{{ t("save") }}</span>
+              <span>{{ $t("actions.save") }}</span>
             </AppButton>
           </div>
         </div>
@@ -123,7 +123,7 @@ async function handleSave() {
         @click="handleSave"
       >
         <IconSave />
-        <span>{{ t("save") }}</span>
+        <span>{{ $t("actions.save") }}</span>
       </AppButton>
     </div>
   </section>

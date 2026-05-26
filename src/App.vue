@@ -29,17 +29,17 @@ const workspaceRef = useTemplateRef<HTMLElement>("workspace");
 const { dragging, leftPaneStyle, onResizePointerDown, resetSplit } = useWorkspaceSplit(workspaceRef);
 
 useHead({
-  title: () => t("app_title"),
+  title: () => t("app.title"),
   htmlAttrs: { lang: () => locale.value },
   meta: [
-    { name: "description", content: () => t("meta_description") },
+    { name: "description", content: () => t("meta.description") },
   ],
 });
 
 const mobileTab = ref<"sources" | "preview">("sources");
 const tabOptions = computed(() => [
-  { value: "sources" as const, icon: IconImagePlus, label: t("tab_sources") },
-  { value: "preview" as const, icon: IconLayoutPanelLeft, label: t("tab_preview") },
+  { value: "sources" as const, icon: IconImagePlus, label: t("tabs.sources") },
+  { value: "preview" as const, icon: IconLayoutPanelLeft, label: t("tabs.preview") },
 ]);
 
 useEventListener(typeof window !== "undefined" ? window : null, "dragover", (e) => {

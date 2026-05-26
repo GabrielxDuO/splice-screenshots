@@ -9,10 +9,8 @@ import ScreenshotItem from "@/components/ScreenshotItem.vue";
 
 import AppButton from "@/components/ui/AppButton.vue";
 import { useAddScreenshots } from "@/composables/useAddScreenshots";
-import { useI18n } from "@/composables/useI18n";
 import { useScreenshotsStore } from "@/composables/useScreenshotsStore";
 
-const { t } = useI18n();
 const store = useScreenshotsStore();
 const { pick } = useAddScreenshots();
 
@@ -33,7 +31,7 @@ const showHero = computed(() => store.workspaceReady.value && isEmpty.value);
         v-if="!store.workspaceReady.value"
         class="flex min-h-[min(40vh,320px)] flex-1 items-center justify-center px-6 text-[13px] text-neutral-400 dark:text-neutral-500"
       >
-        {{ t("workspace_loading") }}
+        {{ $t("workspace.loading") }}
       </div>
 
       <div v-else-if="showHero" class="min-h-0 flex-1 overflow-y-auto overscroll-y-contain">
@@ -44,14 +42,14 @@ const showHero = computed(() => store.workspaceReady.value && isEmpty.value);
         <div class="w-full space-y-4 px-4 py-6 sm:px-6 lg:px-8">
           <div class="flex items-center justify-between gap-2">
             <h2 class="text-[15px] font-semibold tracking-tight">
-              {{ t("tab_sources") }}
+              {{ $t("tabs.sources") }}
               <span class="ml-1 text-[12px] font-normal text-neutral-500 dark:text-neutral-400">
                 {{ store.items.value.length }}
               </span>
             </h2>
             <AppButton variant="ghost" size="md" @click="store.clearAll()">
               <IconTrash2 />
-              <span>{{ t("clear_all") }}</span>
+              <span>{{ $t("actions.clearAll") }}</span>
             </AppButton>
           </div>
 
@@ -76,7 +74,7 @@ const showHero = computed(() => store.workspaceReady.value && isEmpty.value);
 
           <AppButton variant="secondary" size="lg" block @click="pick()">
             <IconImagePlus />
-            <span>{{ t("add_more") }}</span>
+            <span>{{ $t("actions.addMore") }}</span>
           </AppButton>
         </div>
       </PaneScroll>
