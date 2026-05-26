@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed, onMounted, ref, shallowRef } from "vue";
 import IconCircleHelp from "~icons/lucide/circle-help";
 import IconMonitor from "~icons/lucide/monitor";
 import IconMoon from "~icons/lucide/moon";
@@ -13,6 +13,7 @@ import { usePreferencesStore } from "@/composables/usePreferencesStore";
 
 const { t, locale } = useI18n();
 const tipsOpen = ref(false);
+const controlsReady = shallowRef(false);
 const prefs = usePreferencesStore();
 
 const themeOptions = computed(() => [
@@ -62,6 +63,14 @@ const themeModel = computed({
     void setTheme(v);
   },
 });
+
+onMounted(() => {
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      controlsReady.value = true;
+    });
+  });
+});
 </script>
 
 <template>
@@ -90,6 +99,7 @@ const themeModel = computed({
             v-model="themeModel"
             :options="themeOptions"
             :aria-label="$t('theme.label')"
+            :animated="controlsReady"
             size="sm"
           />
         </div>
@@ -98,6 +108,7 @@ const themeModel = computed({
           v-model="locale"
           :options="localeOptions"
           :aria-label="$t('language.label')"
+          :animated="controlsReady"
           size="sm"
         />
       </div>

@@ -12,11 +12,13 @@ interface Option {
 interface Props {
   modelValue: T;
   options: Option[];
+  animated?: boolean;
   ariaLabel?: string;
   size?: "sm" | "md";
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  animated: true,
   size: "md",
   ariaLabel: undefined,
 });
@@ -99,7 +101,8 @@ watch(
   >
     <span
       aria-hidden="true"
-      class="pointer-events-none absolute inset-y-0.5 left-0 rounded-full bg-white shadow-[0_1px_2px_rgba(0,0,0,0.08)] transition-[transform,width] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none dark:bg-neutral-700"
+      class="pointer-events-none absolute inset-y-0.5 left-0 rounded-full bg-white shadow-[0_1px_2px_rgba(0,0,0,0.08)] motion-reduce:transition-none dark:bg-neutral-700"
+      :class="animated ? 'transition-[transform,width] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]' : 'transition-none'"
       :style="indicatorStyle"
     />
 
@@ -112,9 +115,10 @@ watch(
       :aria-checked="opt.value === modelValue"
       :aria-label="opt.ariaLabel ?? opt.label"
       :title="opt.ariaLabel ?? opt.label"
-      class="relative z-10 inline-flex items-center justify-center gap-1.5 rounded-full transition-[color,transform] duration-200 ease-out active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgba(10,132,255,0.45)] motion-reduce:transition-none dark:focus-visible:ring-[rgba(64,156,255,0.5)] [&>svg]:size-4"
+      class="relative z-10 inline-flex items-center justify-center gap-1.5 rounded-full active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgba(10,132,255,0.45)] motion-reduce:transition-none dark:focus-visible:ring-[rgba(64,156,255,0.5)] [&>svg]:size-4"
       :class="[
         size === 'sm' ? 'h-7 px-2.5 text-[12px]' : 'h-8 px-3 text-[13px]',
+        animated ? 'transition-[color,transform] duration-200 ease-out' : 'transition-none',
         opt.value === modelValue
           ? 'text-neutral-900 dark:text-white'
           : 'text-neutral-600 hover:text-neutral-900 dark:text-neutral-300 dark:hover:text-white',
