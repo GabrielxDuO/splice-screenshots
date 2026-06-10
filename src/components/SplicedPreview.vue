@@ -17,7 +17,7 @@ const { t } = useI18n();
 const store = useScreenshotsStore();
 
 const canvas = useTemplateRef<HTMLCanvasElement>("canvas");
-const previewUrl = shallowRef<string | null>(null);
+const previewDataUrl = shallowRef<string | null>(null);
 const previewBlob = shallowRef<Blob | null>(null);
 const saving = shallowRef(false);
 const saveSheetOpen = shallowRef(false);
@@ -27,18 +27,14 @@ const filename = computed(() => `${t("save.filename")}.jpg`);
 
 let previewGeneration = 0;
 
-function setPreviewBlob(blob: Blob) {
-  if (previewUrl.value)
-    URL.revokeObjectURL(previewUrl.value);
+function setPreviewImage(blob: Blob, dataUrl: string) {
   previewBlob.value = blob;
-  previewUrl.value = URL.createObjectURL(blob);
+  previewDataUrl.value = dataUrl;
 }
 
-function clearPreviewBlob() {
-  if (previewUrl.value)
-    URL.revokeObjectURL(previewUrl.value);
+function clearPreviewImage() {
   previewBlob.value = null;
-  previewUrl.value = null;
+  previewDataUrl.value = null;
   saveSheetOpen.value = false;
 }
 
@@ -50,14 +46,14 @@ async function renderPreview() {
   drawSplicedScreenshot(el, store.snapshots.value);
 
   if (!hasImages.value) {
-    clearPreviewBlob();
+    clearPreviewImage();
     return;
   }
 
   const blob = await canvasToBlob(el, "image/jpeg", 0.95);
   if (!blob || generation !== previewGeneration)
     return;
-  setPreviewBlob(blob);
+  setPreviewImage(blob, el.toDataURL("image/jpeg", 0.95));
 }
 
 const redraw = useDebounceFn(renderPreview, 60);
@@ -65,7 +61,7 @@ const redraw = useDebounceFn(renderPreview, 60);
 onMounted(redraw);
 onUnmounted(() => {
   previewGeneration++;
-  clearPreviewBlob();
+  clearPreviewImage();
 });
 watch(() => store.snapshots.value, () => redraw(), { deep: true });
 
@@ -74,6 +70,13 @@ async function getPreviewBlob() {
     return previewBlob.value;
   await renderPreview();
   return previewBlob.value;
+}
+
+async function openSaveSheet() {
+  if (!previewDataUrl.value)
+    await renderPreview();
+  if (previewDataUrl.value)
+    saveSheetOpen.value = true;
 }
 
 async function handleSave() {
@@ -87,7 +90,7 @@ async function handleSave() {
     if (await shareImageBlob(blob, filename.value))
       return;
     if (isIOSBrowser()) {
-      saveSheetOpen.value = true;
+      await openSaveSheet();
       return;
     }
     downloadBlob(blob, filename.value);
@@ -118,13 +121,13 @@ async function handleSave() {
           class="relative overflow-hidden rounded-2xl bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04)] ring-1 ring-black/6 transition-shadow duration-200 ease-out dark:bg-neutral-900 dark:ring-white/6"
         >
           <canvas
-            v-show="hasImages && !previewUrl"
+            v-show="hasImages && !previewDataUrl"
             ref="canvas"
             class="block w-full"
           />
           <img
-            v-if="previewUrl"
-            :src="previewUrl"
+            v-if="previewDataUrl"
+            :src="previewDataUrl"
             :alt="$t('actions.save')"
             class="spliced-preview-image block h-auto w-full bg-white"
             draggable="false"
@@ -192,7 +195,7 @@ async function handleSave() {
       leave-to-class="opacity-0"
     >
       <div
-        v-if="saveSheetOpen && previewUrl"
+        v-if="saveSheetOpen && previewDataUrl"
         class="fixed inset-0 z-50 bg-black/45 px-4 py-5 backdrop-blur-sm"
         role="dialog"
         aria-modal="true"
@@ -219,7 +222,7 @@ async function handleSave() {
           </div>
           <div class="min-h-0 flex-1 overflow-auto bg-neutral-100 p-3 dark:bg-neutral-900">
             <img
-              :src="previewUrl"
+              :src="previewDataUrl"
               :alt="$t('actions.save')"
               class="spliced-preview-image mx-auto block h-auto max-w-full bg-white"
               draggable="false"
