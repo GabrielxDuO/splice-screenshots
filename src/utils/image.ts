@@ -36,6 +36,31 @@ export function downloadBlob(blob: Blob, filename: string): void {
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
+export async function shareImageBlob(blob: Blob, filename: string): Promise<boolean> {
+  if (!navigator.share || !navigator.canShare || typeof File === "undefined")
+    return false;
+
+  const file = new File([blob], filename, { type: blob.type || "image/jpeg" });
+  if (!navigator.canShare({ files: [file] }))
+    return false;
+
+  try {
+    await navigator.share({ files: [file] });
+    return true;
+  }
+  catch (error) {
+    if (error instanceof DOMException && error.name === "AbortError")
+      return true;
+    return false;
+  }
+}
+
+export function isIOSBrowser(): boolean {
+  const platform = navigator.platform;
+  return /iPad|iPhone|iPod/.test(platform)
+    || (platform === "MacIntel" && navigator.maxTouchPoints > 1);
+}
+
 export function isImageFile(file: File): boolean {
   return file.type.startsWith("image/") || imageMimeFromName(file.name) !== null;
 }

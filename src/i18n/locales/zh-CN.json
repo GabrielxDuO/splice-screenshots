@@ -61,7 +61,12 @@
     "loading": "载入本地记录…"
   },
   "save": {
-    "filename": "拼接截图"
+    "filename": "拼接截图",
+    "sheet": {
+      "title": "保存图片",
+      "hint": "长按图片保存到相册",
+      "close": "关闭"
+    }
   },
   "tips": {
     "button": "使用提示",

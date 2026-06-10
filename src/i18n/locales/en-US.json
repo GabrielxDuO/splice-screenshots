@@ -61,7 +61,12 @@
     "loading": "Loading saved screenshots…"
   },
   "save": {
-    "filename": "spliced-screenshot"
+    "filename": "spliced-screenshot",
+    "sheet": {
+      "title": "Save image",
+      "hint": "Touch and hold the image to save it",
+      "close": "Close"
+    }
   },
   "tips": {
     "button": "Tips",
